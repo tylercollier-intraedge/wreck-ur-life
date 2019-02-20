@@ -12,4 +12,23 @@ router
   .put(rentalController.update)
   .delete(rentalController.remove);
 
+  
+// Find by user._id
+// Matches with "/api/rentals/findby/user"
+
+router
+.route('/findby/user')
+  .post(rentalController.findByUser);
+
+// Find by equipment._id
+// Matches with "/api/rentals/findby/user"
+
+router
+.route('/findby/equipment')
+  .post(rentalController.findByEquipment);
+
+router
+  .route('/findby/currentlyout')
+    .get(rentalController.findCurrentlyOut);
+		
 module.exports = router;
