@@ -1,35 +1,37 @@
-// Defining methods for the RentalsController
+const db = require('../models');
+
+// Defining methods for the RentalController
 module.exports = {
-    findAll: function (req, res) {
-      db.Rentals
-        .find(req.query)
-        .sort({ date: -1 })
-        .then(dbModel => res.json(dbModel))
-        .catch(err => res.status(422).json(err));
-    },
-    findById: function (req, res) {
-      db.Rentals
-        .findById(req.params.id)
-        .then(dbModel => res.json(dbModel))
-        .catch(err => res.status(422).json(err));
-    },
-    create: function (req, res) {
-      db.Rentals
-        .create(req.body)
-        .then(dbModel => res.json(dbModel))
-        .catch(err => res.status(422).json(err));
-    },
-    update: function (req, res) {
-      db.Rentals
-        .findOneAndUpdate({ _id: req.params.id }, req.body)
-        .then(dbModel => res.json(dbModel))
-        .catch(err => res.status(422).json(err));
-    },
-    remove: function (req, res) {
-      db.Rentals
-        .findById({ _id: req.params.id })
-        .then(dbModel => dbModel.remove())
-        .then(dbModel => res.json(dbModel))
-        .catch(err => res.status(422).json(err));
-    }
-  };
+  findAll: function (req, res) {
+    db.Rental
+      .find(req.query)
+      .sort({ date: -1 })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+  findById: function (req, res) {
+    db.Rental
+      .findById(req.params.id)
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+  create: function (req, res) {
+    db.Rental
+      .create(req.body)
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+  update: function (req, res) {
+    db.Rental
+      .findOneAndUpdate({ _id: req.params.id }, req.body)
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+  remove: function (req, res) {
+    db.Rental
+      .findById({ _id: req.params.id })
+      .then(dbModel => dbModel.remove())
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  }
+};
