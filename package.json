@@ -1,5 +1,5 @@
 {
-  "name": "sticky",
+  "name": "wreck-up-life",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -12,7 +12,7 @@
     "seed": "node server/scripts/seedDB.js",
     "test": "jest --watchAll"
   },
-  "author": "Adam Drag",
+  "author": "Adam Drag, Kyle Thomas, Madi Walmsley, Jordan Lee",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.18.0",
