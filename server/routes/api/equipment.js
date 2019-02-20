@@ -3,14 +3,14 @@ const equipmentController = require('../../controllers/equipmentController');
 
 // Matches with "/api/notes"
 router.route('/')
-  .get(notesController.findAll)
-  .post(notesController.create);
+  .get(equipmentController.findAll)
+  .post(equipmentController.create);
 
 // Matches with "/api/notes/:id"
 router
   .route('/:id')
-  .get(notesController.findById)
-  .put(notesController.update)
-  .delete(notesController.remove);
+  .get(equipmentController.findById)
+  .put(equipmentController.update)
+  .delete(equipmentController.remove);
 
 module.exports = router;
