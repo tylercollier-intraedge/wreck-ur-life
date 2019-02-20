@@ -3,9 +3,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const rentalSchema = new Schema({
-  type: String,
-  title: String,
-  pictureURL: String,
+    user_id: String,
+    equipment_id: String,
+    rental_date: Date,
 });
 
 const Rental = mongoose.model('Rental', rentalSchema);
