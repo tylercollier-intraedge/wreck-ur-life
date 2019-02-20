@@ -1,6 +1,6 @@
 const db = require('../models');
 
-// Defining methods for the NotesController
+// Defining methods for the RentalController
 module.exports = {
   findAll: function (req, res) {
     db.Rental
