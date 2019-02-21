@@ -57,5 +57,18 @@ module.exports = {
       db.Rental
         .find({rental_date: searchDate })
         .then(results => res.json(results));
+  },
+  availableByDay: async function(req, res){
+    let currentRentals;
+    let parsedDate = new Date(req.body.date);
+    let parsedDateNextDay = new Date();
+    parsedDateNextDay.setDate(parsedDate.getDate() + 1 );
+    await db.Rental.find({ rental_date: { $gt: parsedDate , $lt: parsedDateNextDay } })
+    .then(results => {
+      currentRentals = results;
+    })
+    let rentalIds = currentRentals.map(rental => rental.equipment_id);
+    await db.Equipment.find({ _id : { $nin: rentalIds }})
+    .then(results => res.json(results))
   }
 };
