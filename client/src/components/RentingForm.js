@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import Select from 'react-select';
+import Calendar from 'react-calendar';
 import API from '../utils/API';
 
 class RentingForm extends Component {
     state = {
         users: [],
         equipments: [],
-        selectedUser: null,
-        selectedEquipment: null,
+        selectedUser: {},
+        selectedEquipment: {},
+        date: new Date(),
     }
 
     componentDidMount() {
@@ -41,6 +42,24 @@ class RentingForm extends Component {
         });
     };
 
+    handleCalRent = date => this.setState({ date })
+
+    handleFormSubmit = (event) => {
+        const { selectedUser, selectedEquipment, dateStart, dateFinish } = this.state;
+        event.preventDefault();
+        if (selectedUser, selectedEquipment) {
+          API.addNewRenting({
+            user_id: selectedUser._id,
+            user_fullname: selectedUser.name,
+            equipment_id: selectedEquipment._id,
+            equipment_name: selectedEquipment.name,
+            date: date
+          })
+            .then(() => this.getUsers())
+            .catch(err => console.log(err));
+        }
+    };
+
     render() {
         const { users, equipments, selectedUser, selectedEquipment } = this.state;
         return(
@@ -50,7 +69,7 @@ class RentingForm extends Component {
                         <option
                             key={user._id} 
                             onChange={this.handleUserChange} 
-                            value={user.name}
+                            value={user}
                             name={selectedEquipment}
                         >
                             {user.name}
@@ -62,13 +81,23 @@ class RentingForm extends Component {
                         <option 
                             key={equipment._id}
                             onChange={this.handleEquipmentChange} 
-                            value={equipment.name}
+                            value={equipment}
                             name={selectedEquipment}
                         >
                             {equipment.name}
                         </option>
                     ))}
                 </select>
+                <Calendar
+                    onChange={this.handleCalRent}
+                    value={this.state.date}
+                />
+                <button
+                    type="button"
+                    onClick={this.handleFormSubmit}
+                >
+                    Submit
+                </button>
             </div>
         )
     }      
