@@ -2,14 +2,14 @@ const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
-// const dropzone = require("react-dropzone");
 const outputDirectory = "dist";
 
 module.exports = {
   entry: ["babel-polyfill", "./client/src/index.js"],
   output: {
     path: path.join(__dirname, outputDirectory),
-    filename: "bundle.js"
+    filename: "bundle.js",
+    publicPath: "/"
   },
   module: {
     rules: [
@@ -36,6 +36,7 @@ module.exports = {
   },
   devServer: {
     port: 8080,
+    historyApiFallback: true,
     compress: true,
     disableHostCheck: false,
     open: true,
