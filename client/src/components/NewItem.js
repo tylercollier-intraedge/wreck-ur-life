@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import request from "superagent";
 import Dropzone from "react-dropzone";
+import axios from "axios";
 
 const CLOUDINARY_UPLOAD_PRESET = "tkfksyzh";
 const CLOUDINARY_UPLOAD_URL = "https://api.cloudinary.com/v1_1/wreck-ur-life/image/upload";
@@ -41,7 +42,11 @@ export default class NewItem extends Component {
     });
   }
 
-  uploadItem = () => {};
+  uploadItem = () => {
+    axios.post("/api/equipment/", { name: this.state.input, pictureURL: this.state.uploadedFileCloudinaryUrl }).then(res => {
+      console.log(res);
+    });
+  };
 
   render() {
     return (
@@ -65,7 +70,7 @@ export default class NewItem extends Component {
               </div>
             )}
           </Dropzone>
-          <button>Upload</button>
+          <button onClick={this.uploadItem}>Upload</button>
         </form>
       </div>
     );

@@ -30,5 +30,8 @@ router
 router
   .route('/findby/currentlyout')
     .get(rentalController.findCurrentlyOut);
-		
+
+router
+  .route('/findby/date')
+    .post(rentalController.availableByDay);
 module.exports = router;
