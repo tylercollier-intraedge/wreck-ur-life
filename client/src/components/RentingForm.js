@@ -4,6 +4,7 @@ import API from '../utils/API';
 
 class RentingForm extends Component {
     state = {
+        calendar: true,
         users: [],
         equipments: [],
         selectedUser: {},
@@ -64,6 +65,10 @@ class RentingForm extends Component {
         const { users, equipments, selectedUser, selectedEquipment } = this.state;
         return(
             <div>
+                <Calendar
+                    onChange={this.handleCalRent}
+                    value={this.state.date}
+                />
                 <select>
                     {users.map(user => (
                         <option
