@@ -70,5 +70,21 @@ module.exports = {
     let rentalIds = currentRentals.map(rental => rental.equipment_id);
     await db.Equipment.find({ _id : { $nin: rentalIds }})
     .then(results => res.json(results))
+  },
+  availableByDayGet: async function(req, res){
+    let currentRentals;
+    let parsedDate = new Date(req.params.date);
+    let parsedDateNextDay = new Date();
+    console.log(parsedDate)
+    parsedDateNextDay.setDate(parsedDate.getDate() + 1 );
+    await db.Rental.find({ rental_date: { $gt: parsedDate , $lt: parsedDateNextDay } })
+    .then(results => {
+      currentRentals = results;
+    })
+    let rentalIds = currentRentals.map(rental => rental.equipment_id);
+    await db.Equipment.find({ _id : { $nin: rentalIds }})
+    .then(results => res.json(results))
   }
+
 };
+
