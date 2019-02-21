@@ -1,4 +1,5 @@
-const express = require("express");
+
+const express = require('express');
 
 const mongoose = require("mongoose");
 const routes = require("./server/routes");
@@ -15,6 +16,7 @@ app.use(routes);
 
 // Connect to the Mongo DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/wreck-up-life", { useNewUrlParser: true });
+
 
 // Start the API server
 app.listen(PORT, () => {
