@@ -1,12 +1,13 @@
-
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import "./App.css";
 import Nav from './components/Nav';
 import NewItem from "./components/NewItem";
-import RentingForm from './components/RentingForm';
-import NewCustomer from './components/newCustomer';
 
+import RentingForm from "./components/RentingForm";
+import NewCustomer from "./components/newCustomer";
+import Inventory from "./components/Inventory";
+import SingleEquipment from './components/singleEquipment';
 
 function App() {
   return (
