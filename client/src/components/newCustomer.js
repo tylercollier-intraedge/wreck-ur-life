@@ -1,6 +1,10 @@
 //This is the page used to Add a New Customer
 import React, {Component} from 'react'
-import Axios from 'axios';
+import API from '../utils/API';
+
+const divStyle = {
+    margin: '40px',
+  };
 
 class newCustomer extends Component{
     //local state needed for the form submission
@@ -20,13 +24,13 @@ class newCustomer extends Component{
     handleSubmit(event) {
         event.preventDefault()
         console.log(this.state)
-        let customerInfo = JSON.stringify(this.state)
-        Axios.post('/api/users/:' + customerInfo).catch(err => console.log(err))
+        API.createNewCustomer(this.state)
+        return this.state
     }
 
     render(){
         return(
-            <div>
+            <div style={divStyle}>
                 <form onSubmit={this.handleSubmit.bind(this)}>
                     <text>First Name: </text>
                     <input 

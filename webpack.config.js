@@ -1,15 +1,15 @@
-const webpack = require('webpack');
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-
-const outputDirectory = 'dist';
+const webpack = require("webpack");
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CleanWebpackPlugin = require("clean-webpack-plugin");
+// const dropzone = require("react-dropzone");
+const outputDirectory = "dist";
 
 module.exports = {
-  entry: ['babel-polyfill', './client/src/index.js'],
+  entry: ["babel-polyfill", "./client/src/index.js"],
   output: {
     path: path.join(__dirname, outputDirectory),
-    filename: 'bundle.js'
+    filename: "bundle.js"
   },
   module: {
     rules: [
@@ -17,20 +17,20 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader'
+          loader: "babel-loader"
         }
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        use: ["style-loader", "css-loader"]
       },
       {
         test: /\.scss$/,
-        use: ['style-loader', 'css-loader', 'sass-loader']
+        use: ["style-loader", "css-loader", "sass-loader"]
       },
       {
         test: /\.(png|woff|woff2|eot|ttf|svg)$/,
-        loader: 'url-loader?limit=100000'
+        loader: "url-loader?limit=100000"
       }
     ]
   },
@@ -41,19 +41,19 @@ module.exports = {
     open: true,
     hot: true,
     proxy: {
-      '/api': 'http://localhost:3001'
+      "/api": "http://localhost:3001"
     }
   },
   plugins: [
     new CleanWebpackPlugin([outputDirectory]),
     new HtmlWebpackPlugin({
-      template: './client/public/index.html',
-      favicon: './client/public/favicon.ico',
-      manifest: './client/public/manifest.json'
+      template: "./client/public/index.html",
+      favicon: "./client/public/favicon.ico",
+      manifest: "./client/public/manifest.json"
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+      "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV)
     })
   ]
 };
