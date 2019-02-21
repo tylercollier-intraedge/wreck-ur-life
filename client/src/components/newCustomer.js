@@ -1,25 +1,67 @@
 //This is the page used to Add a New Customer
-import {Component} from 'react'
+import React, {Component} from 'react'
 
-const customerSubmission = (form)=>{
-    console.log(form)
-}
 
 class newCustomer extends Component{
+    //local state needed for the form submission
+    constructor(props){
+        super(props);
+        this.state = {
+            firstName: '',
+            lastName: '',
+            phone: '',
+            email: ''
+        };
+        // this.handleChange = this.handleChange.bind(this);
+        // this.handleSubmit = this.handleSubmission.bind(this);
+    };
+
+    //Submission function takes new customer info and sends to create-new-customer route
+    handleSubmit(event) {
+        event.preventDefault()
+        console.log(this.state)
+    }
+
     render(){
         return(
             <div>
-                <form onSubmit={customerSubmission(this)}>
-                    <h3>First Name:</h3>
-                    <input placeholder="Jane"></input>
-                    <h3>Last Name:</h3>
-                    <input placeholder="Jane"></input>
-                    <h3>Phone Number:</h3>
-                    <input placeholder="(xxx) xxx - xxxx"></input>
-                    <h3>Email:</h3>
-                    <input placeholder="you@somewhere.com"></input>
+                <form onSubmit={this.handleSubmit.bind(this)}>
+                    <text>First Name: </text>
+                    <input 
+                        name="firstName" 
+                        placeholder="Morgan" 
+                        type="text" 
+                        value={this.state.firstName.value} 
+                        onChange={event => this.setState({firstName: event.target.value})}
+                        ></input>
+                    <br/>    
+                    <text>Last Name: </text>
+                    <input 
+                        name="lastName" 
+                        placeholder="Doe" 
+                        type="text" 
+                        value={this.state.lastName.value} 
+                        onChange={event => this.setState({lastName: event.target.value})}
+                        ></input>
+                    <br/>
+                    <text>Number: </text>
+                    <input 
+                        name="phone" 
+                        placeholder="(xxx) xxx - xxxx" 
+                        type="text" value={this.state.phone.value} 
+                        onChange={event => this.setState({phone: event.target.value})}
+                        ></input>
+                    <br/>
+                    <text>Email: </text>
+                    <input 
+                        name="email" 
+                        placeholder="you@somewhere.com" 
+                        type="text" 
+                        value={this.state.email.value} 
+                        onChange={event => this.setState({email: event.target.value})}
+                        ></input>
+                    <button type="submit" value="Submit">Submit</button>
                 </form>
-                <button type="submit">Submit</button>
             </div>
         )
     }
