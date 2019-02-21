@@ -1,13 +1,16 @@
 const mongoose = require("mongoose");
 const db = require("../models");
-const dotenv = require('dotenv').config();
 
 mongoose.connect(
   process.env.MONGODB_URI ||
   "mongodb://localhost/wreck-ur-life"
 , { useNewUrlParser: true });
 
-const sampleEquipment = [{ name: "Lawnmower", pictureURL: "http://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/John_Deere_lawn_mower.JPG/1280px-John_Deere_lawn_mower.JPG"}, { name: "Kayak", pictureURL: "http://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Runaground.jpg/1280px-Runaground.jpg"}, { name : "Snow-Plow", pictureURL: "http://upload.wikimedia.org/wikipedia/commons/9/9f/Sidewalk_plow.JPG"}]
+const sampleEquipment = [
+  { name: "Lawnmower", pictureURL: "http://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/John_Deere_lawn_mower.JPG/1280px-John_Deere_lawn_mower.JPG"}, 
+  { name: "Kayak", pictureURL: "http://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Runaground.jpg/1280px-Runaground.jpg"}, 
+  { name : "Snow-Plow", pictureURL: "http://upload.wikimedia.org/wikipedia/commons/9/9f/Sidewalk_plow.JPG"}
+]
 
 const sampleUsers = [
   { name: "Jordan", email: "test@com.com", phoneNumber: 18005554040},
@@ -52,7 +55,7 @@ const createRecords = async () => {
   .then(() => db.Rental.collection.insertMany(sampleRentals))
   .then((data) => {
     console.log(data.result.n + " rental records inserted!");
-    process.exit(1);
+    process.exit(0);
   })
 }
 createRecords();

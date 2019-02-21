@@ -5,16 +5,12 @@ import API from '../utils/API';
 class RentingForm extends Component {
     state = {
         calendar: true,
+        date: new Date(),
         users: [],
         equipments: [],
         selectedUser: {},
-        selectedEquipment: {},
-        date: new Date(),
-    }
-
-    componentDidMount() {
-        this.getUsers();
-        this.getAllEquipments();
+        selectedEquipment: {}
+        
     }
 
     getUsers = () => {
@@ -27,6 +23,18 @@ class RentingForm extends Component {
         API.getAllEquipments()
           .then(res => this.setState({ equipments: res.data }))
           .catch(err => console.log(err));
+    }
+
+    handleCalendarInput = date => this.setState({ date })
+
+    handleCalendarSubmit = () => {
+        this.setState({ calendar: false })
+        this.getUsers();
+        this.getAllEquipments(); 
+    }
+
+    handleGoBack = () => {
+        this.setState({ calendar: true })
     }
 
     handleUserChange = (event) => {
@@ -43,10 +51,8 @@ class RentingForm extends Component {
         });
     };
 
-    handleCalRent = date => this.setState({ date })
-
     handleFormSubmit = (event) => {
-        const { selectedUser, selectedEquipment, dateStart, dateFinish } = this.state;
+        const { selectedUser, selectedEquipment, date } = this.state;
         event.preventDefault();
         if (selectedUser, selectedEquipment) {
           API.addNewRenting({
@@ -61,51 +67,69 @@ class RentingForm extends Component {
         }
     };
 
-    render() {
-        const { users, equipments, selectedUser, selectedEquipment } = this.state;
-        return(
-            <div>
-                <Calendar
-                    onChange={this.handleCalRent}
-                    value={this.state.date}
-                />
-                <select>
-                    {users.map(user => (
-                        <option
-                            key={user._id} 
-                            onChange={this.handleUserChange} 
-                            value={user}
-                            name={selectedEquipment}
-                        >
-                            {user.name}
-                        </option>
-                    ))}
-                </select>
-                <select>
-                    {equipments.map(equipment => (
-                        <option 
-                            key={equipment._id}
-                            onChange={this.handleEquipmentChange} 
-                            value={equipment}
-                            name={selectedEquipment}
-                        >
-                            {equipment.name}
-                        </option>
-                    ))}
-                </select>
-                <Calendar
-                    onChange={this.handleCalRent}
-                    value={this.state.date}
-                />
-                <button
-                    type="button"
-                    onClick={this.handleFormSubmit}
-                >
-                    Submit
-                </button>
-            </div>
-        )
-    }      
+    renderCalculator = () => (
+        <div>
+            <Calendar
+                onChange={this.handleCalendarInput}
+                value={this.state.date}
+            />
+            <button
+                type="button"
+                onClick={this.handleCalendarSubmit}
+            >
+                Submit
+            </button>
+        </div>
+    )
+
+    renderRentingForm = () => (
+        <div>
+            <select>
+                {this.state.users.map(user => (
+                    <option
+                        key={user._id}
+                        onChange={this.handleUserChange}
+                        value={user}
+                        name={this.state.selectedUser}
+                    >
+                        {user.name}
+                    </option>
+                ))}
+            </select>
+            <br />
+            <select>
+                {this.state.equipments.map(equipment => (
+                    <option
+                        key={equipment._id}
+                        onChange={this.handleEquipmentChange}
+                        value={equipment}
+                        name={this.state.selectedEquipment}
+                    >
+                        {equipment.name}
+                    </option>
+                ))}
+            </select>
+            <br />
+            <button
+                type="button"
+                onClick={this.handleFormSubmit}
+            >
+                Submit
+            </button>
+            <br /> 
+            <button
+                type="button"
+                onClick={this.handleGoBack}
+            >
+                Go back To Calendar
+            </button>
+        </div>
+    )
+
+    render() {        
+        return this.state.calendar ? this.renderCalculator() : this.renderRentingForm();
+    }  
+
 }
 
 export default RentingForm;
