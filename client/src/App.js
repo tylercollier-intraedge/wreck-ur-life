@@ -1,10 +1,9 @@
-
 import React, { Component } from "react";
 import "./App.css";
 import NewItem from "./components/NewItem";
-import RentingForm from './components/RentingForm';
-import NewCustomer from './components/newCustomer';
-
+import RentingForm from "./components/RentingForm";
+import NewCustomer from "./components/newCustomer";
+import Inventory from "./components/Inventory";
 
 class App extends Component {
   render() {
@@ -15,6 +14,7 @@ class App extends Component {
         <NewItem />
         <RentingForm />
         <NewCustomer />
+        <Inventory />
       </div>
     );
   }
