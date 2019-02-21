@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import "./App.css";
 import Nav from './components/Nav';
 import NewItem from "./components/NewItem";
+import CustomerList from './components/CustomerList';
 import RentingForm from "./components/RentingForm";
 import NewCustomer from "./components/newCustomer";
 import Inventory from "./components/Inventory";
