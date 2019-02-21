@@ -1,4 +1,4 @@
-import { isMainThread } from "worker_threads";
+import newCustomer from './client/src/components/newCustomer'
 
 //These are the test methods that will be used to validate functionality
 
