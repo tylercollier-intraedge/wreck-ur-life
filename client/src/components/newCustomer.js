@@ -1,11 +1,15 @@
 //This is the page used to Add a New Customer
 import {Component} from 'react'
 
+const customerSubmission = (form)=>{
+    console.log(form)
+}
+
 class newCustomer extends Component{
     render(){
         return(
             <div>
-                <form>
+                <form onSubmit={customerSubmission(this)}>
                     <h3>First Name:</h3>
                     <input placeholder="Jane"></input>
                     <h3>Last Name:</h3>
