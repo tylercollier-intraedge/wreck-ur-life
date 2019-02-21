@@ -64,6 +64,7 @@ class RentingForm extends Component {
             date: date
           })
             .then(() => this.getUsers())
+            .then(() => this.setState({ calendar: true, date: new Date() }))
             .catch(err => console.log(err));
         }
     };
