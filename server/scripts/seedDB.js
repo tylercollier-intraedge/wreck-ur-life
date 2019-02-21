@@ -4,22 +4,10 @@ const dotenv = require('dotenv').config();
 
 mongoose.connect(
   process.env.MONGODB_URI ||
-  "mongodb://localhost/stickyBoard"
+  "mongodb://localhost/wreck-ur-life"
 , { useNewUrlParser: true });
 
-const noteSeed = [
-  {
-    note: "Laudry"
-  },
-  {
-    note: "Homework"
-  },
-  {
-    note: "Gym"
-  }
-];
-
-const sampleEquipment = [{ type: "Lawnmower", pictureURL: "http://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/John_Deere_lawn_mower.JPG/1280px-John_Deere_lawn_mower.JPG"}, { title: "Kayak", pictureURL: "http://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Runaground.jpg/1280px-Runaground.jpg"}, {type: "Snow-Plow", pictureURL: "http://upload.wikimedia.org/wikipedia/commons/9/9f/Sidewalk_plow.JPG"}]
+const sampleEquipment = [{ name: "Lawnmower", pictureURL: "http://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/John_Deere_lawn_mower.JPG/1280px-John_Deere_lawn_mower.JPG"}, { name: "Kayak", pictureURL: "http://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Runaground.jpg/1280px-Runaground.jpg"}, { name : "Snow-Plow", pictureURL: "http://upload.wikimedia.org/wikipedia/commons/9/9f/Sidewalk_plow.JPG"}]
 
 const sampleUsers = [
   { name: "Jordan", email: "test@com.com", phoneNumber: 18005554040},
