@@ -4,7 +4,7 @@ import "./App.css";
 import NewItem from "./components/NewItem";
 import RentingForm from './components/RentingForm';
 import NewCustomer from './components/newCustomer';
-
+import SingleEquipment from './components/singleEquipment';
 
 class App extends Component {
   render() {
@@ -13,8 +13,10 @@ class App extends Component {
         <h1>WRECK UR LIFE</h1>
 
         <NewItem />
+        <SingleEquipment id="5c6eedbf0ab0db1a50358867"/>
         <RentingForm />
         <NewCustomer />
+        
       </div>
     );
   }
