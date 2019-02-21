@@ -19,6 +19,8 @@ function App() {
           <Route exact path="/newCustomer" component={NewCustomer} />
           <Route exact path="/inventory" component={Inventory} />
           {/* <Route exact path="/newCustomer" component={NewCustomer} /> */}
+          <Route exact path="/customerList" component={CustomerList} />
+          <Route exact path="/inventory" component={Inventory}/>
           {/* <Route exact path="/history" component={History} /> */}
         </Switch>
       </div>
