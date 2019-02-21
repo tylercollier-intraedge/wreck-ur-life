@@ -27,6 +27,14 @@ function Nav() {
       </li>
       <li className="nav-item">
         <Link
+          to="/inventory"
+          className={window.location.pathname === "/inventory" ? "nav-link active" : "nav-link"}
+        >
+          Inventory
+        </Link>
+      </li>
+      <li className="nav-item">
+        <Link
           to="/customerList"
           className={window.location.pathname === "/customerList" ? "nav-link active" : "nav-link"}
         >
