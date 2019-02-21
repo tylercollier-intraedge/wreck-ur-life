@@ -34,4 +34,7 @@ router
 router
   .route('/findby/date')
     .post(rentalController.availableByDay);
+router
+  .route('/findby/date/:date')
+    .get(rentalController.availableByDayGet);
 module.exports = router;

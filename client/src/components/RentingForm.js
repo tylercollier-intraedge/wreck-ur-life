@@ -10,7 +10,6 @@ class RentingForm extends Component {
         equipments: [],
         selectedUser: {},
         selectedEquipment: {}
-        
     }
 
     getUsers = () => {
@@ -19,18 +18,20 @@ class RentingForm extends Component {
           .catch(err => console.log(err));
     }
 
-    getAllEquipments = () => {
-        API.getAllEquipments()
+    getAllEquipmentsbyAvailability = () => {
+        const { date } = this.state;
+        API.getAllEquipmentsbyAvailability(date)
           .then(res => this.setState({ equipments: res.data }))
           .catch(err => console.log(err));
     }
 
     handleCalendarInput = date => this.setState({ date })
 
-    handleCalendarSubmit = () => {
+    handleCalendarSubmit = (event) => {
+        event.preventDefault();
         this.setState({ calendar: false })
         this.getUsers();
-        this.getAllEquipments(); 
+        this.getAllEquipmentsbyAvailability(); 
     }
 
     handleGoBack = () => {
@@ -83,6 +84,7 @@ class RentingForm extends Component {
     )
 
     renderRentingForm = () => (
+        
         <div>
             <select>
                 {this.state.users.map(user => (
