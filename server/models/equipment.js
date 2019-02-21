@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const equipmentSchema = new Schema({
   name: String,
-  pictureURL: String,
+  pictureURL: String
 });
 
 const Equipment = mongoose.model('Equipment', equipmentSchema);
