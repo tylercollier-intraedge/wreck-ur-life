@@ -12,15 +12,6 @@ function App() {
   return (
     <Router>
       <div className="App">
-
-        <h1>WRECK UR LIFE</h1>
-
-        <NewItem />
-        {/* <SingleEquipment id="5c6eedbf0ab0db1a50358867" /> */}
-        <RentingForm />
-        <NewCustomer />
-        <Inventory />
-
         <Nav />
         <Switch>
           <Route exact path="/" component={RentingForm} />
