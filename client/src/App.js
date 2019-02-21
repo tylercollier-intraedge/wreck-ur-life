@@ -1,10 +1,11 @@
-
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import "./App.css";
 import NewItem from "./components/NewItem";
-import RentingForm from './components/RentingForm';
-import NewCustomer from './components/newCustomer';
+
+import RentingForm from "./components/RentingForm";
+import NewCustomer from "./components/newCustomer";
+import Inventory from "./components/Inventory";
 import SingleEquipment from './components/singleEquipment';
 
 class App extends Component {
@@ -17,7 +18,8 @@ class App extends Component {
         <SingleEquipment id="5c6eedbf0ab0db1a50358867"/>
         <RentingForm />
         <NewCustomer />
-        
+        <Inventory />
+
       </div>
     );
   }
