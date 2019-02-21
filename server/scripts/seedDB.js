@@ -7,18 +7,6 @@ mongoose.connect(
   "mongodb://localhost/stickyBoard"
 , { useNewUrlParser: true });
 
-const noteSeed = [
-  {
-    note: "Laudry"
-  },
-  {
-    note: "Homework"
-  },
-  {
-    note: "Gym"
-  }
-];
-
 const sampleEquipment = [{ type: "Lawnmower", pictureURL: "http://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/John_Deere_lawn_mower.JPG/1280px-John_Deere_lawn_mower.JPG"}, { title: "Kayak", pictureURL: "http://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Runaground.jpg/1280px-Runaground.jpg"}, {type: "Snow-Plow", pictureURL: "http://upload.wikimedia.org/wikipedia/commons/9/9f/Sidewalk_plow.JPG"}]
 
 const sampleUsers = [
