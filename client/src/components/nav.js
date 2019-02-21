@@ -12,17 +12,25 @@ function Nav() {
       <li className="nav-item">
         <Link
           to="/newItem"
-          className={window.location.pathname === "/about" ? "nav-link active" : "nav-link"}
+          className={window.location.pathname === "/newItem" ? "nav-link active" : "nav-link"}
         >
-          NewItem
+          New Item
         </Link>
       </li>
       <li className="nav-item">
         <Link
           to="/newCustomer"
-          className={window.location.pathname === "/blog" ? "nav-link active" : "nav-link"}
+          className={window.location.pathname === "/newCustomer" ? "nav-link active" : "nav-link"}
         >
-          NewCustomer
+          New Customer
+        </Link>
+      </li>
+      <li className="nav-item">
+        <Link
+          to="/customerList"
+          className={window.location.pathname === "/customerList" ? "nav-link active" : "nav-link"}
+        >
+          Customer List
         </Link>
       </li>
     </ul>
