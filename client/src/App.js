@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import NewItem from "./components/NewItem";
 
 import RentingForm from "./components/RentingForm";
 import NewCustomer from "./components/newCustomer";
 import Inventory from "./components/Inventory";
-import SingleEquipment from './components/singleEquipment';
+// import SingleEquipment from "./components/singleEquipment";
 
 class App extends Component {
   render() {
@@ -15,18 +15,16 @@ class App extends Component {
         <h1>WRECK UR LIFE</h1>
 
         <NewItem />
-        <SingleEquipment id="5c6eedbf0ab0db1a50358867"/>
+        {/* <SingleEquipment id="5c6eedbf0ab0db1a50358867" /> */}
         <RentingForm />
         <NewCustomer />
         <Inventory />
-
       </div>
     );
   }
 }
 
 export default App;
-
 
 // class App extends Component {
 //   render() {
