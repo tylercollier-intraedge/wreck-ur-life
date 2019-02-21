@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import RentingForm from './components/RentingForm';
 import './App.css';
+import NewCustomer from './components/newCustomer';
 
 class App extends Component {
   render() {
@@ -8,6 +9,7 @@ class App extends Component {
       <div className="App">
         <h1>WRECK UR LIFE</h1>
         <RentingForm />
+        <NewCustomer />
       </div>
     );
   }
