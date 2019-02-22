@@ -26,6 +26,7 @@
     "lodash": "^4.17.11",
     "mongoose": "^5.4.0",
     "morgan": "^1.9.1",
+    "nodemailer": "^5.1.1",
     "nodemon": "^1.18.9",
     "prop-types": "^15.6.2",
     "react": "^16.5.2",
@@ -41,7 +42,8 @@
     "react-scripts": "^2.1.2",
     "redux": "^4.0.1",
     "redux-promise": "^0.6.0",
-    "superagent": "^4.1.0"
+    "superagent": "^4.1.0",
+    "twilio": "^3.28.1"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
