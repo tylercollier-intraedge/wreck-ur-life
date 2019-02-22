@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Modal, Image, Button } from "react-bootstrap";
+import { Modal, Button } from "react-bootstrap";
 import API from "../utils/API";
 
 class SingleCustomer extends Component {
@@ -28,7 +28,6 @@ class SingleCustomer extends Component {
 
   componentDidMount() {
     API.getSingleUser(this.props.id).then(response => {
-      console.log(response.data);
       this.setState({
         name: response.data.name,
         email: response.data.email,
@@ -37,7 +36,6 @@ class SingleCustomer extends Component {
     });
   }
   render() {
-    console.log(this.state.name);
     return (
       <>
         <Button variant="outline-info" onClick={this.handleShow}>

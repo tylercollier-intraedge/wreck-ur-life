@@ -1,7 +1,7 @@
 //This will list all the customers
 import React, {Component} from 'react';
-import {Customer, CustomerContainer} from './CustomerIndividual'
-import {Container, Jumbotron, Modal, Button} from 'react-bootstrap'
+import {CustomerContainer} from './CustomerIndividual'
+import {Container, Jumbotron} from 'react-bootstrap'
 import API from '../utils/API';
 import SingleCustomer from './singleCustomer';
 
@@ -15,6 +15,7 @@ class CustomerList extends Component{
         this.getCustomerList();
       }
 
+    //Gets all customers  
     getCustomerList(){
         API.getAllUsers()
         .then(res => {this.setState({customers: res.data}); console.log(res.data)})
@@ -25,15 +26,14 @@ class CustomerList extends Component{
         this.setState({ show: false });
       }
     
-      handleShow() {
-        this.setState({ show: true });
-      }
+    handleShow() {
+      this.setState({ show: true });
+    }
 
     render(){
         return(
             <Container>
                 <Jumbotron className="justify-content-md-center">Customer List</Jumbotron>
-                {console.log(this.state.customers.length)}
                 {this.state.customers.length ? (
                     <CustomerContainer>
                     {this.state.customers.map(listItem => (<SingleCustomer id={listItem._id}/>))}
