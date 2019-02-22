@@ -5,6 +5,7 @@ import Nav from "./components/Nav";
 import NewItem from "./components/NewItem";
 import CustomerList from "./components/CustomerList";
 import RentingForm from "./components/RentingForm";
+
 import NewCustomer from "./components/newCustomer";
 import Inventory from "./components/Inventory";
 
@@ -30,23 +31,3 @@ function App() {
 }
 
 export default App;
-
-// class App extends Component {
-//   render() {
-//     return (
-//       <Router>
-//         <div className="App">
-//           <Nav />
-//           <Switch>
-//             <Route exact path="/" component={RentingForm} />
-//             <Route exact path="/newItem" component={NewItem} />
-//             <Route exact path="/newCustomer" component={NewCustomer} />
-//             <Route exact path="/newCustomer" component={NewCustomer} />
-//             {/* <Route exact path="/history" component={History} /> */}
-//             <Route component={NoMovie} />
-//           </Switch>
-//         </div>
-//       </Router>
-//     );
-//   }
-// }
