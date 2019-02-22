@@ -1,5 +1,6 @@
 //This is the page used to Add a New Customer
 import React, { Component } from "react";
+import {Form, Button, Row, Col, Alert} from 'react-bootstrap'
 import API from "../utils/API";
 
 const divStyle = {
@@ -21,6 +22,13 @@ class newCustomer extends Component {
   //Submission function takes new customer info and sends to create-new-customer route
   handleSubmit(event) {
     API.createNewCustomer(this.state)
+    this.setState({
+      firstName: "",
+      lastName: "",
+      phone: "",
+      email: ""
+    })
+    Alert('New User Added!')
     return this.state
   }
 
@@ -36,47 +44,55 @@ class newCustomer extends Component {
   render() {
     return (
       <div style={divStyle}>
-        <form onSubmit={this.handleSubmit.bind(this)}>
-          <span>First Name: </span>
-          <input
-            name="firstName"
-            placeholder="Morgan"
-            type="text"
+
+        <Form>
+        <Form.Row>
+        <Form.Group controlId="firstName" as={Col}>
+          <Form.Label>First Name</Form.Label>
+          <Form.Control 
+            type="Name" 
+            placeholder="Morgan" 
             value={this.state.firstName.value}
             onChange={event => this.setState({ firstName: event.target.value })}
-          />
-          <br />
-          <span>Last Name: </span>
-          <input
-            name="lastName"
-            placeholder="Doe"
-            type="text"
+            />
+        </Form.Group>
+        <Form.Group controlId="lastName" as={Col}>
+          <Form.Label>last Name</Form.Label>
+          <Form.Control 
+            type="Name" 
+            placeholder="Doe" 
             value={this.state.lastName.value}
             onChange={event => this.setState({ lastName: event.target.value })}
-          />
-          <br />
-          <span>Phone Number: </span>
-          <input
-            name="phone"
-            placeholder="xxx xxx xxxx"
-            type="number"
+            />
+        </Form.Group>
+        </Form.Row>
+        <Form.Row>
+        <Form.Group as={Col}></Form.Group>
+        <Form.Group controlId="email" as={Col}>
+          <Form.Label>Email address</Form.Label>
+          <Form.Control 
+            type="email" 
+            placeholder="name@example.com" 
+            value={this.state.email.value}
+            onChange={event => this.setState({ email: event.target.value })}/>
+        </Form.Group>
+        <Form.Group controlId="phone" as={Col}>
+          <Form.Label>Phone Number</Form.Label>
+          <Form.Control 
+            type="Number" 
+            placeholder="xxx xxx xxxx" 
             value={this.state.phone.value}
             onChange={event => this.setState({ phone: event.target.value })}
-            //onChange={event => phoneCheck(event) ? this.setState({ phone: event.target.value }) : console.log('Not a Valid Number')}
-          />
-          <br />
-          <span>Email: </span>
-          <input
-            name="email"
-            placeholder="you@somewhere.com"
-            type="email"
-            value={this.state.email.value}
-            onChange={event => this.setState({ email: event.target.value })}
-          />
-          <button type="submit" value="Submit">
-            Submit
-          </button>
-        </form>
+            />
+        </Form.Group>
+        <Form.Group as={Col}></Form.Group>
+        </Form.Row>
+        <Form.Group as={Row}>
+          <Col sm={{ span: 10, offset: 2 }}>
+            <Button type="submit" onClick={this.handleSubmit.bind(this)}>Submit</Button>
+          </Col>
+        </Form.Group>
+        </Form>
       </div>
     );
   }
