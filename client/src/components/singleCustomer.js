@@ -8,6 +8,7 @@ class SingleCustomer extends Component {
     this.state = {};
     this.handleShow = this.handleShow.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.deleteCustomer = this.deleteCustomer.bind(this);
 
     this.state = {
       show: false
@@ -22,6 +23,13 @@ class SingleCustomer extends Component {
     this.setState({ show: true });
   }
 
+  deleteCustomer() {
+    console.log(this)
+    this.setState({ show: false });
+    API.deleteUser(this.state.id);
+    window.location.reload()
+  }
+
   newRental(){
       
   }
@@ -29,6 +37,7 @@ class SingleCustomer extends Component {
   componentDidMount() {
     API.getSingleUser(this.props.id).then(response => {
       this.setState({
+        id: response.data._id,
         name: response.data.name,
         email: response.data.email,
         phoneNumber: response.data.phoneNumber
@@ -57,6 +66,9 @@ class SingleCustomer extends Component {
             </Button>
             <Button variant="primary" onClick={this.newRental}>
               New Rental
+            </Button>
+            <Button variant="danger" onClick={this.deleteCustomer}>
+              Remove
             </Button>
           </Modal.Footer>
         </Modal>
