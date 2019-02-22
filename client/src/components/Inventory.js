@@ -47,17 +47,20 @@ export default class Inventory extends Component {
     const showInventory =
       this.state.equipment != null &&
       this.state.equipment.map(item => {
+        let today = new Date();
         return (
           <tr key={item._id}>
             <td>
               <img src={item.pictureURL} width={70} />
             </td>
             <td>{item.name}</td>
-            <td>{item.rental_date ? item.rental_date : "pending"}</td>
+            <td>{item.rental_date ? item.rental_date : today.toDateString}</td>
             <td>
               <SingleEquipment id={item._id} />
               <Link to="/">
-                <Button variant="primary">Rent</Button>
+                <Button variant="primary" style={{ margin: "0px 20px" }}>
+                  Rent
+                </Button>
               </Link>
               <Button variant="danger" onClick={() => this.deleteItem(item._id)}>
                 Delete
@@ -67,10 +70,23 @@ export default class Inventory extends Component {
         );
       });
 
+    // let dates =
+    //   this.state.equipment != null &&
+    //   this.state.equipment.map(item => {
+    //     item.rental_date = item.rental_date.replace(/-/g, "");
+    //     return item;
+    //   });
+    // console.log(dates);
+    // let mhm =
+    //   dates != false &&
+    //   dates.map(item => {
+    //     console.log(item);
+    //   });
+
     return (
-      <div>
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
         <h1>inventory</h1>
-        <Table bordered striped hover>
+        <Table bordered striped hover style={{ width: "97%" }}>
           <thead>
             <tr>
               <th>Photo</th>
