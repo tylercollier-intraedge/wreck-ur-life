@@ -8,8 +8,8 @@ class RentingForm extends Component {
         date: new Date(),
         users: [],
         equipments: [],
-        selectedUser: "",
-        selectedEquipment: ""
+        selectedUser: {},
+        selectedEquipment: {}
     }
 
     getUsers = () => {
@@ -31,7 +31,9 @@ class RentingForm extends Component {
         event.preventDefault();
         this.setState({ calendar: false })
         this.getUsers();
-        this.getAllEquipmentsbyAvailability();         
+        this.getAllEquipmentsbyAvailability();  
+        this.setState({selectedUser: this.state.users[0]}); 
+        this.setState({selectedEquipment: this.state.equipments[0]});         
     }
 
     handleGoBack = () => {
@@ -42,7 +44,7 @@ class RentingForm extends Component {
         const { value } = event.target;
         this.setState({
           selectedUser: value
-        });
+        });                
     };
 
     handleEquipmentChange = (event) => {
@@ -53,17 +55,16 @@ class RentingForm extends Component {
     };
 
     handleFormSubmit = (event) => {
-        const { selectedUser, selectedEquipment, date } = this.state;        
+        const { selectedUser, selectedEquipment, date } = this.state;            
         event.preventDefault();
         if (selectedUser, selectedEquipment) {
           API.addNewRenting({
-            user_id: selectedUser,
-            user_fullname: selectedUser.name,
-            equipment_id: selectedEquipment,
-            equipment_name: selectedEquipment.name,
-            date: date
+            user_id: JSON.parse(selectedUser)._id,
+            user_fullname: JSON.parse(selectedUser).name,
+            equipment_id: JSON.parse(selectedEquipment)._id,
+            equipment_name: JSON.parse(selectedEquipment).name,
+            rental_date: date
           })
-            .then(() => this.getUsers())
             .then(() => this.setState({ calendar: true, date: new Date() }))
             .catch(err => console.log(err));
         }
@@ -91,7 +92,7 @@ class RentingForm extends Component {
                 {this.state.users.map(user => (
                     <option
                         key={user._id}
-                        value={user._id}
+                        value={JSON.stringify(user)}
                     >
                         {user.name}
                     </option>
@@ -102,7 +103,7 @@ class RentingForm extends Component {
                 {this.state.equipments.map(equipment => (
                     <option
                         key={equipment._id}
-                        value={equipment._id}
+                        value={JSON.stringify(equipment)}
                     >
                         {equipment.name}
                     </option>

@@ -15,15 +15,20 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  create: function (req, res) {
-    let body = req.body;
-    const currentDate = new Date().toDateString();
-    req.body.rental_date = new Date(currentDate);
-    db.Rental
-      .create(req.body)
+  create: function(req, res) {
+    db.Rental.create(req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  // create: function (req, res) {
+  //   let body = req.body;
+  //   const currentDate = new Date().toDateString();
+  //   req.body.rental_date = new Date(currentDate);
+  //   db.Rental
+  //     .create(req.body)
+  //     .then(dbModel => res.json(dbModel))
+  //     .catch(err => res.status(422).json(err));
+  // },
   update: function (req, res) {
     db.Rental
       .findOneAndUpdate({ _id: req.params.id }, req.body)

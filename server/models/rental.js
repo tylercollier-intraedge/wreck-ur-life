@@ -7,7 +7,8 @@ const rentalSchema = new Schema({
     user_fullname: String,
     equipment_id: String,
     equipment_name: String,
-    rental_date: Date,
+    rental_date: Date
+    // return_date: Date
 });
 
 const Rental = mongoose.model('Rental', rentalSchema);
