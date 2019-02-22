@@ -44,7 +44,7 @@ class SingleEquipment extends Component {
             <Modal.Title>{this.state.name}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Image src={this.state.pictureURL} rounded />
+            <Image src={this.state.pictureURL} rounded fluid />
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={this.handleClose}>
