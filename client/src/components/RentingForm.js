@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Calendar from 'react-calendar';
 import API from '../utils/API';
 import moment from 'moment';
-import { Card, Button } from 'react-bootstrap';
+import { Card, Button, Form } from 'react-bootstrap';
 
 class RentingFormTwo extends Component {
     state = {
@@ -77,7 +77,7 @@ class RentingFormTwo extends Component {
         <Card>
             <Card.Body>
                 <Calendar
-                    className="mx-auto"
+                    className="calendar"
                     onChange={this.handleCalendarInput}
                     value={this.state.date}
                 />
@@ -93,49 +93,56 @@ class RentingFormTwo extends Component {
 
     renderRentingForm = () => (
         <div>
-            <select value={this.state.selectedUser} onChange={this.handleUserChange}>
-                {this.state.users.map(user => (
-                    <option
-                        key={user._id}
-                        value={JSON.stringify(user)}
-                    >
-                        {user.name}
-                    </option>
-                ))}
-            </select>
-            <br />
-            <select value={this.state.value} onChange={this.handleEquipmentChange}>
-                {this.state.equipments.map(equipment => (
-                    <option
-                        key={equipment._id}
-                        value={JSON.stringify(equipment)}
-                    >
-                        {equipment.name}
-                    </option>
-                ))}
-            </select>
-            <br />
-            <button type="button" onClick={this.handleFormSubmit} >
-                Submit
-            </button>
-            <br />
-            <button type="button" onClick={this.handleGoBack} >
+            <Form className="rentingForm">
+                <Form.Group>
+                    <Form.Label>Select Customer's Name:</Form.Label>
+                    <Form.Control as="select" value={this.state.selectedUser} onChange={this.handleUserChange}>
+                        {this.state.users.map(user => (
+                            <option
+                                key={user._id}
+                                value={JSON.stringify(user)}
+                            >
+                                {user.name}
+                            </option>
+                        ))}
+                    </Form.Control>
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Select Equipment's Name:</Form.Label>
+                    <Form.Control as="select" value={this.state.value} onChange={this.handleEquipmentChange}>
+                        {this.state.equipments.map(equipment => (
+                            <option
+                                key={equipment._id}
+                                value={JSON.stringify(equipment)}
+                            >
+                                {equipment.name}
+                            </option>
+                        ))}
+                    </Form.Control>
+                </Form.Group>
+                <Button type="button" onClick={this.handleFormSubmit} >
+                    Submit
+                </Button>
+            </Form>
+            
+            <Button type="button" onClick={this.handleGoBack} >
                 Go back To Calendar
-            </button>
+            </Button>
         </div>
     )
 
     renderDisplay = () => ( 
-        <div>
-            <div>Renting Info</div>
-            <div>Renter Name: {JSON.parse(this.state.selectedUser).name}</div>
-            <div>Equipment Name: {JSON.parse(this.state.selectedEquipment).name}</div>
-            <div>Renting Date: {moment(this.state.date).format('MMMM Do YYYY')}</div>
-        </div>
+        <Card className="rentingDisplay">
+            <Card.Body>  
+                <div className="displayTitle">Renting Info</div>
+                <div className="displayText">Renter's Name: <span>{JSON.parse(this.state.selectedUser).name}</span></div>
+                <div className="displayText">Equipment's Name: <span>{JSON.parse(this.state.selectedEquipment).name}</span></div>
+                <div className="displayText">Renting Date: <span>{moment(this.state.date).format('MMMM Do YYYY')}</span></div>
+            </Card.Body>
+        </Card>
     )
 
     render() {
-        console.log(this.state.date)
         return (
             <div>
                 {this.state.calendar ? this.renderCalendar() : this.renderRentingForm()}
