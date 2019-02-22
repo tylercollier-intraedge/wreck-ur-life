@@ -6,5 +6,6 @@ export default {
   getAllEquipmentsbyAvailability: (equipmentDate) => axios.get('/api/rentals/findby/date/'+ equipmentDate),
   addNewRenting: rentingData => axios.post('/api/rentals', rentingData),
   createNewCustomer: (customerInfo) => axios.post('/api/users/', customerInfo),
-  getSingleUser: (id) => axios.get('/api/users/' + id)
+  getSingleUser: (id) => axios.get('/api/users/' + id),
+  deleteUser: (id) => axios.delete('/api/users/' + id)
 };
