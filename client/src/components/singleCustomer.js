@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Modal, Image, Button } from "react-bootstrap";
 import API from "../utils/API";
 
-class SingleEquipment extends Component {
+class SingleCustomer extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -22,12 +22,17 @@ class SingleEquipment extends Component {
     this.setState({ show: true });
   }
 
+  newRental(){
+      
+  }
+
   componentDidMount() {
-    API.getSingleEquipment(this.props.id).then(response => {
-      console.log(response);
+    API.getSingleUser(this.props.id).then(response => {
+      console.log(response.data);
       this.setState({
         name: response.data.name,
-        pictureURL: response.data.pictureURL
+        email: response.data.email,
+        phoneNumber: response.data.phoneNumber
       });
     });
   }
@@ -35,8 +40,8 @@ class SingleEquipment extends Component {
     console.log(this.state.name);
     return (
       <>
-        <Button variant="primary" onClick={this.handleShow}>
-          Launch demo modal
+        <Button variant="outline-info" onClick={this.handleShow}>
+          {this.state.name}
         </Button>
 
         <Modal show={this.state.show} onHide={this.handleClose}>
@@ -44,14 +49,16 @@ class SingleEquipment extends Component {
             <Modal.Title>{this.state.name}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Image src={this.state.pictureURL} rounded fluid />
+            <h6>Email: {this.state.email}</h6>
+            <h6>Phone Number: {this.state.phoneNumber}</h6>
+    {this.state.rentalHistory ? this.state.rentalHistory.map((des)=> <p>{des}</p>) : <p>No Rental History Available</p>}
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={this.handleClose}>
               Close
             </Button>
-            <Button variant="primary" onClick={this.handleClose}>
-              Save Changes
+            <Button variant="primary" onClick={this.newRental}>
+              New Rental
             </Button>
           </Modal.Footer>
         </Modal>
@@ -60,4 +67,4 @@ class SingleEquipment extends Component {
   }
 }
 
-export default SingleEquipment;
+export default SingleCustomer;
