@@ -35,15 +35,18 @@ export default class NewItem extends Component {
         console.error("err", err);
       }
       if (response.body.secure_url !== "") {
-        this.setState({
-          uploadedFileCloudinaryUrl: response.body.secure_url
-        });
+        this.setState(
+          {
+            uploadedFileCloudinaryUrl: response.body.secure_url
+          },
+          () => console.log(this.state.uploadedFileCloudinaryUrl)
+        );
       }
     });
   }
 
   uploadItem = () => {
-    axios.post("/api/equipment/", { name: this.state.input, pictureURL: this.state.uploadedFileCloudinaryUrl }).then(res => {
+    axios.post("/api/equipments/", { name: this.state.input, pictureURL: this.state.uploadedFileCloudinaryUrl }).then(res => {
       console.log(res);
     });
   };

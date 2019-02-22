@@ -16,8 +16,15 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   create: function (req, res) {
+    let dbReady = {
+      name: `${req.body.firstName} ${req.body.lastName}`,
+      email: req.body.email,
+      phoneNumber: req.body.phone,
+      rentalHistory: '',
+      currentRentals: ''
+    }
     db.User
-      .create(req.body)
+      .create(dbReady)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
