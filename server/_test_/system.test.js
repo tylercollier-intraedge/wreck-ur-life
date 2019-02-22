@@ -1,4 +1,5 @@
 import newCustomer from './client/src/components/newCustomer'
+import API from '../../client/src/utils/API';
 
 //These are the test methods that will be used to validate functionality
 

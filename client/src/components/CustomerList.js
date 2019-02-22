@@ -1,7 +1,7 @@
 //This will list all the customers
 import React, {Component} from 'react';
-import {Customer, CustomerContainer} from './CustomerIndividual'
-import {Container, Jumbotron, Modal, Button} from 'react-bootstrap'
+import {CustomerContainer} from './CustomerIndividual'
+import {Container, Jumbotron} from 'react-bootstrap'
 import API from '../utils/API';
 import SingleCustomer from './singleCustomer';
 
