@@ -15,6 +15,7 @@ class CustomerList extends Component{
         this.getCustomerList();
       }
 
+    //Gets all customers  
     getCustomerList(){
         API.getAllUsers()
         .then(res => {this.setState({customers: res.data}); console.log(res.data)})
@@ -25,15 +26,14 @@ class CustomerList extends Component{
         this.setState({ show: false });
       }
     
-      handleShow() {
-        this.setState({ show: true });
-      }
+    handleShow() {
+      this.setState({ show: true });
+    }
 
     render(){
         return(
             <Container>
                 <Jumbotron className="justify-content-md-center">Customer List</Jumbotron>
-                {console.log(this.state.customers.length)}
                 {this.state.customers.length ? (
                     <CustomerContainer>
                     {this.state.customers.map(listItem => (<SingleCustomer id={listItem._id}/>))}
