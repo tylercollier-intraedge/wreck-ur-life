@@ -1,5 +1,7 @@
 //This is the page used to Add a New Customer
 import React, { Component } from "react";
+//import {InputGroup, FormControl} from 'react-bootstrap'
+import {NumberFormat} from 'react-number-format';
 import API from "../utils/API";
 
 const divStyle = {
@@ -13,7 +15,7 @@ class newCustomer extends Component {
     this.state = {
       firstName: "",
       lastName: "",
-      phone: "", phoneNumberFormat: "",
+      phone: "",
       email: ""
     };
     // this.handleChange = this.handleChange.bind(this);
@@ -22,16 +24,24 @@ class newCustomer extends Component {
 
   //Submission function takes new customer info and sends to create-new-customer route
   handleSubmit(event) {
-    console.log(this.state);
+    event.preventDefault();
     API.createNewCustomer(this.state);
     return this.state;
+  }
+
+  phoneCheck(num) {
+    const check = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/
+    let result;
+    num.value.match(check) ?  result=true :  result=false
+    console.log(result)
+    return result
   }
 
   render() {
     return (
       <div style={divStyle}>
         <form onSubmit={this.handleSubmit.bind(this)}>
-          <text>First Name: </text>
+          <span>First Name: </span>
           <input
             name="firstName"
             placeholder="Morgan"
@@ -40,7 +50,7 @@ class newCustomer extends Component {
             onChange={event => this.setState({ firstName: event.target.value })}
           />
           <br />
-          <text>Last Name: </text>
+          <span>Last Name: </span>
           <input
             name="lastName"
             placeholder="Doe"
@@ -49,16 +59,17 @@ class newCustomer extends Component {
             onChange={event => this.setState({ lastName: event.target.value })}
           />
           <br />
-          <text>Number: </text>
+          <span>Phone Number: </span>
           <input
             name="phone"
             placeholder="(xxx) xxx - xxxx"
             type="number"
             value={this.state.phone.value}
             onChange={event => this.setState({ phone: event.target.value })}
+            //onChange={event => phoneCheck(event) ? this.setState({ phone: event.target.value }) : console.log('Not a Valid Number')}
           />
           <br />
-          <text>Email: </text>
+          <span>Email: </span>
           <input
             name="email"
             placeholder="you@somewhere.com"
