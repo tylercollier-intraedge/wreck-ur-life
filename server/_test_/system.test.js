@@ -1,5 +1,4 @@
-import newCustomer from './client/src/components/newCustomer'
-import API from '../../client/src/utils/API';
+import API from '../../client/src/utils/API'
 
 //These are the test methods that will be used to validate functionality
 
@@ -13,12 +12,8 @@ describe('New Customer Added', ()=>{
             phone: '(800) 867-5309',
             email: 'testy@test.com'
         }
-
-        expect(newCustomer.handleSubmit({
-            firstName: 'testy',
-            lastName: 'McTesterson',
-            phone: '(800) 867-5309',
-            email: 'testy@test.com'
-        })).toEqual(expectedResult)
+        const check = axios('/api/users').then((res) => {return res.data.length})
+        console.log(check)
+        expect(axios('/api/users')).toEqual(check + 1)
     }) 
 })

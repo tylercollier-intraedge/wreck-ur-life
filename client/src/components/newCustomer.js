@@ -1,7 +1,5 @@
 //This is the page used to Add a New Customer
 import React, { Component } from "react";
-//import {InputGroup, FormControl} from 'react-bootstrap'
-import {NumberFormat} from 'react-number-format';
 import API from "../utils/API";
 
 const divStyle = {
@@ -18,17 +16,15 @@ class newCustomer extends Component {
       phone: "",
       email: ""
     };
-    // this.handleChange = this.handleChange.bind(this);
-    // this.handleSubmit = this.handleSubmission.bind(this);
   }
 
   //Submission function takes new customer info and sends to create-new-customer route
   handleSubmit(event) {
-    event.preventDefault();
-    API.createNewCustomer(this.state);
-    return this.state;
+    API.createNewCustomer(this.state)
+    return this.state
   }
 
+  //Regex validation for phone number
   phoneCheck(num) {
     const check = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/
     let result;
@@ -62,7 +58,7 @@ class newCustomer extends Component {
           <span>Phone Number: </span>
           <input
             name="phone"
-            placeholder="(xxx) xxx - xxxx"
+            placeholder="xxx xxx xxxx"
             type="number"
             value={this.state.phone.value}
             onChange={event => this.setState({ phone: event.target.value })}
