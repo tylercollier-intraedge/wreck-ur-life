@@ -4,7 +4,7 @@ import { Nav } from 'react-bootstrap';
 
 function Navigation() {
   return (
-    <Nav className="justify-content-center" activeKey="/">
+    <Nav className="justify-content-center">
       <Nav.Item>
         <Link to="/" className={window.location.pathname === "/" ? "nav-link active" : "nav-link"}>
           Home
