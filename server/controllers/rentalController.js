@@ -75,7 +75,7 @@ module.exports = {
     let parsedDateNextDay = new Date();
     parsedDateNextDay.setDate(parsedDate.getDate() + 1 );
 
-    console.log(parsedDate + "<today tomorrow> " + parsedDateNextDay)
+    console.log(parsedDate + "<selected day | that day + 1> " + parsedDateNextDay)
     await db.Rental.find({ rental_date: { $gte: parsedDate , $lt: parsedDateNextDay } })
     .then(results => {
       currentRentals = results;

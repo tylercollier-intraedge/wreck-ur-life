@@ -2,25 +2,44 @@ import React, { Component } from 'react';
 import Calendar from 'react-calendar';
 import API from '../utils/API';
 
-class RentingForm extends Component {
-    state = {
-        calendar: true,
-        date: new Date(),
-        users: [],
-        equipments: [],
-        selectedUser: "",
-        selectedEquipment: ""
+class RentingFormTwo extends Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            calendar: true,
+            date: new Date(),
+            users: [],
+            equipments: [],
+            selectedUser: {},
+            selectedEquipment: {}
+        }
+    }
+    componentDidUpdate(){
+        console.log("State", this.state)
     }
 
-    getUsers = () => {
+    componentDidMount(){
         API.getAllUsers()
-          .then(res => this.setState({ users: res.data }))
-          .catch(err => console.log(err));
+        .then( results => this.setState({ users: results.data }))
+        .then(() => API.getAllEquipmentsbyAvailability(this.state.date))
+        .then((res) => this.setState({ equipments: res.data }))
+        .then(() => this.setState({ selectedUser: this.state.users[0], selectedEquipment: this.state.equipments[0] }))
+        .catch(err => { 
+            console.log("Issue running componentDidMount");
+            console.log(err);
+        } )
     }
+
+    // getUsers = () => {
+    //     API.getAllUsers()
+    //       .then(res => this.setState({ users: res.data }))
+    //       .catch(err => console.log(err));
+    // }
 
     getAllEquipmentsbyAvailability = () => {
         const { date } = this.state;
-        API.getAllEquipmentsbyAvailability(date)
+        console.log("gettingEquipmentFor" , date.toDateString());
+        API.getAllEquipmentsbyAvailability(date.toDateString())
           .then(res => this.setState({ equipments: res.data }))
           .catch(err => console.log(err));
     }
@@ -30,7 +49,7 @@ class RentingForm extends Component {
     handleCalendarSubmit = (event) => {
         event.preventDefault();
         this.setState({ calendar: false })
-        this.getUsers();
+        // this.getUsers();
         this.getAllEquipmentsbyAvailability();         
     }
 
@@ -42,34 +61,44 @@ class RentingForm extends Component {
         const { value } = event.target;
         this.setState({
           selectedUser: value
-        });
+        }); 
+        console.log('VALUE: ', value);
+               
     };
 
     handleEquipmentChange = (event) => {
+        console.log(event)
+        console.log("target", event.target)
         const { value } = event.target;
+        console.log("hasEquipChangeValue", value);
         this.setState({
             selectedEquipment: value
         });
     };
 
-    handleFormSubmit = (event) => {
-        const { selectedUser, selectedEquipment, date } = this.state;        
+    handleFormSubmit = async (event) => {
         event.preventDefault();
+        const { selectedUser, selectedEquipment, date } = this.state;    
+        console.log("state", this.state);
         if (selectedUser, selectedEquipment) {
+        console.log("creating with date", date)
           API.addNewRenting({
-            user_id: selectedUser,
+            user_id: selectedUser._id,
             user_fullname: selectedUser.name,
-            equipment_id: selectedEquipment,
+            equipment_id: selectedEquipment._id,
             equipment_name: selectedEquipment.name,
-            date: date
+            rental_date: date
           })
-            .then(() => this.getUsers())
-            .then(() => this.setState({ calendar: true, date: new Date() }))
+            .then((newObj) => { 
+                console.log(newObj)
+                this.setState({ calendar: true })
+            })
+            .then(() => this.getAllEquipmentsbyAvailability())
             .catch(err => console.log(err));
         }
     };
 
-    renderCalculator = () => (
+    renderCalendar = () => (
         <div>
             <Calendar
                 onChange={this.handleCalendarInput}
@@ -89,10 +118,7 @@ class RentingForm extends Component {
         <div>
             <select value={this.state.selectedUser} onChange={this.handleUserChange}>
                 {this.state.users.map(user => (
-                    <option
-                        key={user._id}
-                        value={user._id}
-                    >
+                    <option key={user._id} value={user._id} >
                         {user.name}
                     </option>
                 ))}
@@ -100,35 +126,26 @@ class RentingForm extends Component {
             <br />
             <select value={this.state.value} onChange={this.handleEquipmentChange}>
                 {this.state.equipments.map(equipment => (
-                    <option
-                        key={equipment._id}
-                        value={equipment._id}
-                    >
+                    <option key={equipment._id} value={equipment._id} >
                         {equipment.name}
                     </option>
                 ))}
             </select>
             <br />
-            <button
-                type="button"
-                onClick={this.handleFormSubmit}
-            >
+            <button type="button" onClick={this.handleFormSubmit} >
                 Submit
             </button>
             <br /> 
-            <button
-                type="button"
-                onClick={this.handleGoBack}
-            >
+            <button type="button" onClick={this.handleGoBack} >
                 Go back To Calendar
             </button>
         </div>
     )
 
     render() {        
-        return this.state.calendar ? this.renderCalculator() : this.renderRentingForm();
+        return this.state.calendar ? this.renderCalendar() : this.renderRentingForm();
     }  
 
 }
 
-export default RentingForm;
+export default RentingFormTwo;
