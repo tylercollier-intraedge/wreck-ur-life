@@ -13,7 +13,7 @@ class newCustomer extends Component {
     this.state = {
       firstName: "",
       lastName: "",
-      phone: "",
+      phone: "", phoneNumberFormat: "",
       email: ""
     };
     // this.handleChange = this.handleChange.bind(this);
@@ -53,7 +53,7 @@ class newCustomer extends Component {
           <input
             name="phone"
             placeholder="(xxx) xxx - xxxx"
-            type="text"
+            type="number"
             value={this.state.phone.value}
             onChange={event => this.setState({ phone: event.target.value })}
           />
@@ -62,7 +62,7 @@ class newCustomer extends Component {
           <input
             name="email"
             placeholder="you@somewhere.com"
-            type="text"
+            type="email"
             value={this.state.email.value}
             onChange={event => this.setState({ email: event.target.value })}
           />
