@@ -1,46 +1,30 @@
 import React, { Component } from 'react';
 import Calendar from 'react-calendar';
 import API from '../utils/API';
+import moment from 'moment';
+import { Card, Button } from 'react-bootstrap';
 
 class RentingFormTwo extends Component {
-    constructor(props){
-        super(props)
-        this.state = {
-            calendar: true,
-            date: new Date(),
-            users: [],
-            equipments: [],
-            selectedUser: {},
-            selectedEquipment: {}
-        }
-    }
-    componentDidUpdate(){
-        console.log("State", this.state)
+    state = {
+        calendar: true,
+        result: false,
+        date: new Date(),
+        users: [],
+        equipments: [],
+        selectedUser: {},
+        selectedEquipment: {}
     }
 
-    componentDidMount(){
+    getUsers = () => {
         API.getAllUsers()
-        .then( results => this.setState({ users: results.data }))
-        .then(() => API.getAllEquipmentsbyAvailability(this.state.date))
-        .then((res) => this.setState({ equipments: res.data }))
-        .then(() => this.setState({ selectedUser: this.state.users[0], selectedEquipment: this.state.equipments[0] }))
-        .catch(err => {
-            console.log("Issue running componentDidMount");
-            console.log(err);
-        } )
+          .then(res => this.setState({ users: res.data, selectedUser: JSON.stringify(res.data[0]) }))
+          .catch(err => console.log(err));
     }
-
-    // getUsers = () => {
-    //     API.getAllUsers()
-    //       .then(res => this.setState({ users: res.data }))
-    //       .catch(err => console.log(err));
-    // }
 
     getAllEquipmentsbyAvailability = () => {
         const { date } = this.state;
-        console.log("gettingEquipmentFor" , date.toDateString());
         API.getAllEquipmentsbyAvailability(date.toDateString())
-          .then(res => this.setState({ equipments: res.data }))
+          .then(res => this.setState({ equipments: res.data, selectedEquipment: JSON.stringify(res.data[0]) }))
           .catch(err => console.log(err));
     }
 
@@ -56,7 +40,7 @@ class RentingFormTwo extends Component {
     }
 
     handleGoBack = () => {
-        this.setState({ calendar: true })
+        this.setState({ calendar: true, result: false, date: new Date() })
     }
 
     handleUserChange = (event) => {
@@ -67,22 +51,16 @@ class RentingFormTwo extends Component {
     };
 
     handleEquipmentChange = (event) => {
-        console.log(event)
-        console.log("target", event.target)
         const { value } = event.target;
-        console.log("hasEquipChangeValue", value);
         this.setState({
             selectedEquipment: value
         });
     };
 
     handleFormSubmit = (event) => {
-        const { selectedUser, selectedEquipment, date } = this.state;
         event.preventDefault();
         const { selectedUser, selectedEquipment, date } = this.state;
-        console.log("state", this.state);
         if (selectedUser, selectedEquipment) {
-        console.log("creating with date", date)
           API.addNewRenting({
             user_id: JSON.parse(selectedUser)._id,
             user_fullname: JSON.parse(selectedUser).name,
@@ -90,28 +68,30 @@ class RentingFormTwo extends Component {
             equipment_name: JSON.parse(selectedEquipment).name,
             rental_date: date
           })
-            .then(() => this.setState({ calendar: true, date: new Date() }))
+            .then(() => this.setState({ result: true }))
             .catch(err => console.log(err));
         }
     };
 
     renderCalendar = () => (
-        <div>
-            <Calendar
-                onChange={this.handleCalendarInput}
-                value={this.state.date}
-            />
-            <button
+        <Card>
+            <Card.Body>
+                <Calendar
+                    className="mx-auto"
+                    onChange={this.handleCalendarInput}
+                    value={this.state.date}
+                />
+            </Card.Body>
+            <Button
                 type="button"
                 onClick={this.handleCalendarSubmit}
             >
                 Submit
-            </button>
-        </div>
+            </Button>
+        </Card>
     )
 
     renderRentingForm = () => (
-
         <div>
             <select value={this.state.selectedUser} onChange={this.handleUserChange}>
                 {this.state.users.map(user => (
@@ -145,8 +125,23 @@ class RentingFormTwo extends Component {
         </div>
     )
 
+    renderDisplay = () => ( 
+        <div>
+            <div>Renting Info</div>
+            <div>Renter Name: {JSON.parse(this.state.selectedUser).name}</div>
+            <div>Equipment Name: {JSON.parse(this.state.selectedEquipment).name}</div>
+            <div>Renting Date: {moment(this.state.date).format('MMMM Do YYYY')}</div>
+        </div>
+    )
+
     render() {
-        return this.state.calendar ? this.renderCalendar() : this.renderRentingForm();
+        console.log(this.state.date)
+        return (
+            <div>
+                {this.state.calendar ? this.renderCalendar() : this.renderRentingForm()}
+                {this.state.result ? this.renderDisplay() : ""}
+            </div>
+        )
     }
 
 }

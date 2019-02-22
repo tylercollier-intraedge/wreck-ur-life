@@ -1,48 +1,49 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Nav } from 'react-bootstrap';
 
-function Nav() {
+function Navigation() {
   return (
-    <ul className="nav nav-tabs">
-      <li className="nav-item">
+    <Nav className="justify-content-center" activeKey="/">
+      <Nav.Item>
         <Link to="/" className={window.location.pathname === "/" ? "nav-link active" : "nav-link"}>
           Home
         </Link>
-      </li>
-      <li className="nav-item">
+      </Nav.Item>
+      <Nav.Item>
         <Link
           to="/newItem"
           className={window.location.pathname === "/newItem" ? "nav-link active" : "nav-link"}
         >
           New Item
         </Link>
-      </li>
-      <li className="nav-item">
+      </Nav.Item>
+      <Nav.Item>
         <Link
           to="/newCustomer"
           className={window.location.pathname === "/newCustomer" ? "nav-link active" : "nav-link"}
         >
           New Customer
         </Link>
-      </li>
-      <li className="nav-item">
+      </Nav.Item>
+      <Nav.Item>
         <Link
           to="/inventory"
           className={window.location.pathname === "/inventory" ? "nav-link active" : "nav-link"}
         >
           Inventory
         </Link>
-      </li>
-      <li className="nav-item">
+      </Nav.Item>
+      <Nav.Item>
         <Link
           to="/customerList"
           className={window.location.pathname === "/customerList" ? "nav-link active" : "nav-link"}
         >
           Customer List
         </Link>
-      </li>
-    </ul>
+      </Nav.Item>
+    </Nav>
   );
 }
 
-export default Nav;
+export default Navigation;

@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
-import Nav from "./components/Nav";
+import Navigation from "./components/Navigation";
 import NewItem from "./components/NewItem";
 import CustomerList from "./components/CustomerList";
 import RentingForm from "./components/RentingForm";
@@ -13,8 +13,8 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <h1>WRECK UR LIFE</h1>
-        <Nav />
+        <h1 className="title">WRECK UR LIFE</h1>
+        <Navigation />
         <Switch>
           <Route exact path="/" component={RentingForm} />
           <Route exact path="/newItem" component={NewItem} />
@@ -23,7 +23,6 @@ function App() {
           {/* <Route exact path="/newCustomer" component={NewCustomer} /> */}
           <Route exact path="/customerList" component={CustomerList} />
           <Route exact path="/inventory" component={Inventory} />
-          {/* <Route exact path="/history" component={History} /> */}
         </Switch>
       </div>
     </Router>
