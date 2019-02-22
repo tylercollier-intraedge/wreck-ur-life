@@ -8,8 +8,8 @@ class RentingForm extends Component {
         date: new Date(),
         users: [],
         equipments: [],
-        selectedUser: {},
-        selectedEquipment: {}
+        selectedUser: "",
+        selectedEquipment: ""
     }
 
     getUsers = () => {
@@ -31,7 +31,7 @@ class RentingForm extends Component {
         event.preventDefault();
         this.setState({ calendar: false })
         this.getUsers();
-        this.getAllEquipmentsbyAvailability(); 
+        this.getAllEquipmentsbyAvailability();         
     }
 
     handleGoBack = () => {
@@ -53,13 +53,13 @@ class RentingForm extends Component {
     };
 
     handleFormSubmit = (event) => {
-        const { selectedUser, selectedEquipment, date } = this.state;
+        const { selectedUser, selectedEquipment, date } = this.state;        
         event.preventDefault();
         if (selectedUser, selectedEquipment) {
           API.addNewRenting({
-            user_id: selectedUser._id,
+            user_id: selectedUser,
             user_fullname: selectedUser.name,
-            equipment_id: selectedEquipment._id,
+            equipment_id: selectedEquipment,
             equipment_name: selectedEquipment.name,
             date: date
           })
@@ -87,26 +87,22 @@ class RentingForm extends Component {
     renderRentingForm = () => (
         
         <div>
-            <select>
+            <select value={this.state.selectedUser} onChange={this.handleUserChange}>
                 {this.state.users.map(user => (
                     <option
                         key={user._id}
-                        onChange={this.handleUserChange}
-                        value={user}
-                        name={this.state.selectedUser}
+                        value={user._id}
                     >
                         {user.name}
                     </option>
                 ))}
             </select>
             <br />
-            <select>
+            <select value={this.state.value} onChange={this.handleEquipmentChange}>
                 {this.state.equipments.map(equipment => (
                     <option
                         key={equipment._id}
-                        onChange={this.handleEquipmentChange}
-                        value={equipment}
-                        name={this.state.selectedEquipment}
+                        value={equipment._id}
                     >
                         {equipment.name}
                     </option>
