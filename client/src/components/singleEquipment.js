@@ -35,8 +35,8 @@ class SingleEquipment extends Component {
     console.log(this.state.name);
     return (
       <>
-        <Button variant="primary" onClick={this.handleShow}>
-          Launch demo modal
+        <Button variant="info" onClick={this.handleShow}>
+          View
         </Button>
 
         <Modal show={this.state.show} onHide={this.handleClose}>
