@@ -17,8 +17,6 @@ module.exports = {
   },
   create: function (req, res) {
     let body = req.body;
-    const currentDate = new Date().toDateString();
-    req.body.rental_date = new Date(currentDate);
     db.Rental
       .create(req.body)
       .then(dbModel => res.json(dbModel))
@@ -75,9 +73,10 @@ module.exports = {
     let currentRentals;
     let parsedDate = new Date(req.params.date);
     let parsedDateNextDay = new Date();
-    console.log(parsedDate)
     parsedDateNextDay.setDate(parsedDate.getDate() + 1 );
-    await db.Rental.find({ rental_date: { $gt: parsedDate , $lt: parsedDateNextDay } })
+
+    console.log(parsedDate + "<today tomorrow> " + parsedDateNextDay)
+    await db.Rental.find({ rental_date: { $gte: parsedDate , $lt: parsedDateNextDay } })
     .then(results => {
       currentRentals = results;
     })
