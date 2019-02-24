@@ -1,10 +1,30 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
 .App {
   text-align: center;
 }
 
+.header {
+  background-color: #A2D6E5;
+}
+
 /* Main Title */
 .title {
-  margin: 20px auto;
+  margin: 0 auto;
+  padding: 20px 0;
   font-family: 'Fredericka the Great', cursive;
   color: blue;
   font-size: 50px;
@@ -63,7 +83,6 @@
   border-radius: 8px;
   -webkit-box-shadow: 0px 2px 4px 2px rgba(0,0,0,.4);
   box-shadow: 0px 2px 4px 2px rgba(0,0,0,.4);
-
 }
 
 /* Rental History */

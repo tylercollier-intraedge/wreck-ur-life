@@ -4,7 +4,7 @@ import API from '../utils/API';
 import moment from 'moment';
 import { Card, Button, Form } from 'react-bootstrap';
 
-class RentingFormTwo extends Component {
+class RentingForm extends Component {
     state = {
         calendar: true,
         result: false,
@@ -153,4 +153,4 @@ class RentingFormTwo extends Component {
 
 }
 
-export default RentingFormTwo;
+export default RentingForm;
