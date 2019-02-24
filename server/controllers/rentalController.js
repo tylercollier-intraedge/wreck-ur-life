@@ -1,5 +1,5 @@
 const db = require('../models');
-
+const comUtils = require('../utils/comUtils')
 // Defining methods for the RentalController
 module.exports = {
   findAll: function (req, res) {
@@ -17,18 +17,18 @@ module.exports = {
   },
   create: function(req, res) {
     db.Rental.create(req.body)
-      .then(dbModel => res.json(dbModel))
+      .then(dbModel => { 
+        res.json(dbModel) 
+        return Promise.all([db.User.findById(dbModel.user_id), Promise.resolve(dbModel)])
+      })
+      .then(result => {
+        let newRental = result[1];
+        return comUtils.sendEmail(result[0].email, "New Rental Created!", "You have a new rental for " +
+           newRental.rental_date.toDateString() + " for the item " + newRental.equipment_name );
+      })
+      .then(status => console.log("Email Sent" ,  status))
       .catch(err => res.status(422).json(err));
   },
-  // create: function (req, res) {
-  //   let body = req.body;
-  //   const currentDate = new Date().toDateString();
-  //   req.body.rental_date = new Date(currentDate);
-  //   db.Rental
-  //     .create(req.body)
-  //     .then(dbModel => res.json(dbModel))
-  //     .catch(err => res.status(422).json(err));
-  // },
   update: function (req, res) {
     db.Rental
       .findOneAndUpdate({ _id: req.params.id }, req.body)
