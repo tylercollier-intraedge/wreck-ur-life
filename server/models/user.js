@@ -17,16 +17,7 @@ const userSchema = new Schema({
     { 
       type: Number,
       required: true
-    },
-  rentalHistory: 
-    { 
-      type: Array
-    },
-  currentRentals: 
-    { 
-      type: Array
     }
-
 });
 
 const User = mongoose.model('User', userSchema);

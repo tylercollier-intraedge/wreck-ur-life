@@ -102,15 +102,14 @@ class RentalHistory extends Component {
                         key={rental._id}
                     >
                         Renter's Name: <span>{rental.user_fullname}</span>
-                        Rented Date: <span>{moment(this.state.rental_date).format('MMMM Do YYYY')}</span>
+                        Rented Date: <span>{moment(rental.rental_date).format('MMMM Do YYYY')}</span>
                     </Card.Text>
                 ))}
             </Card.Body>
         </Card>
-    )
-        
+    )   
 
-    renderCustomerFilter = () => ( 
+    renderCustomerFilter = () => (         
         <Form className="form">
             <Form.Group>
                 <Form.Label>Select Customer's Name:</Form.Label>
