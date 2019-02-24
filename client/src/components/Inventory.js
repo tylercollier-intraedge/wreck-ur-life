@@ -54,7 +54,6 @@ export default class Inventory extends Component {
               <img src={item.pictureURL} width={70} />
             </td>
             <td>{item.name}</td>
-            {/* <td>{item.rental_date ? item.rental_date : today.toDateString}</td> */}
             <td>
               <SingleEquipment id={item._id} />
               <Link to="/">
@@ -70,28 +69,15 @@ export default class Inventory extends Component {
         );
       });
 
-    // let dates =
-    //   this.state.equipment != null &&
-    //   this.state.equipment.map(item => {
-    //     item.rental_date = item.rental_date.replace(/-/g, "");
-    //     return item;
-    //   });
-    // console.log(dates);
-    // let mhm =
-    //   dates != false &&
-    //   dates.map(item => {
-    //     console.log(item);
-    //   });
-
     return (
       <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
-        <h1>Inventory</h1>
+        <h1>Full Inventory</h1>
         <Table bordered striped hover style={{ width: "97%" }}>
           <thead>
             <tr>
               <th>Photo</th>
               <th>Name</th>
-              {/* <th>Available</th> */}
+              <th>Actions</th>
               <th />
             </tr>
           </thead>
