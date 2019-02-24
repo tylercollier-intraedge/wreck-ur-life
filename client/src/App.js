@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import "./App.css";
+import Header from "./components/Header";
 import Navigation from "./components/Navigation";
 import NewItem from "./components/NewItem";
 import CustomerList from "./components/CustomerList";
@@ -8,12 +8,13 @@ import RentingForm from "./components/RentingForm";
 import RentalHistory from "./components/RentalHistory";
 import NewCustomer from "./components/newCustomer";
 import Inventory from "./components/Inventory";
+import "./App.css";
 
 function App() {
   return (
     <Router>
       <div className="App">
-        <h1 className="title">WRECK UR LIFE</h1>
+        <Header />
         <Navigation />
         <Switch>
           <Route exact path="/" component={RentingForm} />
