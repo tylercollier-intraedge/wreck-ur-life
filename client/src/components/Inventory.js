@@ -54,7 +54,7 @@ export default class Inventory extends Component {
               <img src={item.pictureURL} width={70} />
             </td>
             <td>{item.name}</td>
-            <td>{item.rental_date ? item.rental_date : today.toDateString}</td>
+            {/* <td>{item.rental_date ? item.rental_date : today.toDateString}</td> */}
             <td>
               <SingleEquipment id={item._id} />
               <Link to="/">
@@ -85,13 +85,13 @@ export default class Inventory extends Component {
 
     return (
       <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
-        <h1>inventory</h1>
+        <h1>Inventory</h1>
         <Table bordered striped hover style={{ width: "97%" }}>
           <thead>
             <tr>
               <th>Photo</th>
               <th>Name</th>
-              <th>Available</th>
+              {/* <th>Available</th> */}
               <th />
             </tr>
           </thead>

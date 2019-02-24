@@ -21,7 +21,6 @@ function App() {
           <Route exact path="/newItem" component={NewItem} />
           <Route exact path="/newCustomer" component={NewCustomer} />
           <Route exact path="/inventory" component={Inventory} />
-          {/* <Route exact path="/newCustomer" component={NewCustomer} /> */}
           <Route exact path="/customerList" component={CustomerList} />
           <Route exact path="/inventory" component={Inventory} />
           <Route exact path="/rentalHistory" component={RentalHistory} />

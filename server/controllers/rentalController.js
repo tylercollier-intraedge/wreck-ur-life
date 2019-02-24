@@ -1,6 +1,6 @@
 const db = require('../models');
 const comUtils = require('../utils/comUtils')
-// Defining methods for the RentalController
+
 module.exports = {
   findAll: function (req, res) {
     db.Rental
