@@ -8,7 +8,6 @@ describe('usersController', ()=> {
         expect(users.length).toBeGreaterThan(0)
     })
     it('Returns an error when given a non object ID to search for',() => {
-
         return expect(Axios.get('http://localhost:3001/api/users/1')).rejects.toThrow()
     })
 })
