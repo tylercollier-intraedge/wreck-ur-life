@@ -49,9 +49,15 @@ module.exports = {
         .then(results => res.json(results))
         .catch(err => res.status(500).json(err))
   },
+  findByCustomer: function(req, res) {
+    db.Rental
+        .find({ user_id: req.params.id })
+        .then(results => res.json(results))
+        .catch(err => res.status(500).json(err))
+  },
   findByEquipment: function(req, res) {
     db.Rental
-        .find({equipment_id: req.body.id})
+        .find({ equipment_id: req.params.id })
         .then(results => res.json(results))
         .catch(err => res.status(500).json(err))
   },

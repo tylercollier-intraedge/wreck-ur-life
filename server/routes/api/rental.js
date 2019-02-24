@@ -20,12 +20,14 @@ router
 .route('/findby/user')
   .post(rentalController.findByUser);
 
-// Find by equipment._id
-// Matches with "/api/rentals/findby/user"
-
+// Find by user_id
 router
-.route('/findby/equipment')
-  .post(rentalController.findByEquipment);
+.route('/findby/customer/:id')
+  .get(rentalController.findByCustomer);
+// Find by equipment_id
+router
+.route('/findby/equipment/:id')
+  .get(rentalController.findByEquipment);
 
 router
   .route('/findby/currentlyout')

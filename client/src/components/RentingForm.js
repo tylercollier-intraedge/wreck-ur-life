@@ -93,7 +93,7 @@ class RentingFormTwo extends Component {
 
     renderRentingForm = () => (
         <div>
-            <Form className="rentingForm">
+            <Form className="form">
                 <Form.Group>
                     <Form.Label>Select Customer's Name:</Form.Label>
                     <Form.Control as="select" value={this.state.selectedUser} onChange={this.handleUserChange}>
@@ -132,9 +132,9 @@ class RentingFormTwo extends Component {
     )
 
     renderDisplay = () => ( 
-        <Card className="rentingDisplay">
+        <Card className="renderResultDisplay">
+            <Card.Title className="displayTitle">Renting Info:</Card.Title>
             <Card.Body>  
-                <div className="displayTitle">Renting Info</div>
                 <div className="displayText">Renter's Name: <span>{JSON.parse(this.state.selectedUser).name}</span></div>
                 <div className="displayText">Equipment's Name: <span>{JSON.parse(this.state.selectedEquipment).name}</span></div>
                 <div className="displayText">Renting Date: <span>{moment(this.state.date).format('MMMM Do YYYY')}</span></div>

@@ -42,6 +42,14 @@ function Navigation() {
           Customer List
         </Link>
       </Nav.Item>
+      <Nav.Item>
+        <Link
+          to="/rentalHistory"
+          className={window.location.pathname === "/rentalHistory" ? "nav-link active" : "nav-link"}
+        >
+          Rental History
+        </Link>
+      </Nav.Item>
     </Nav>
   );
 }
