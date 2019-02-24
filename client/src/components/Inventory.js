@@ -1,8 +1,10 @@
+import API from '../utils/API'
 import React, { Component } from "react";
 import axios from "axios";
-import { Table, Button } from "react-bootstrap";
+import { Table, Button, Image, Col } from "react-bootstrap";
 import SingleEquipment from "./singleEquipment";
 import { Link } from "react-router-dom";
+
 
 export default class Inventory extends Component {
   constructor() {
@@ -12,7 +14,10 @@ export default class Inventory extends Component {
     };
   }
   componentDidMount() {
-    this.getInventory();
+    API.getAllEquipment()
+    .then((results) => {
+      this.setState({ equipment: results.data })
+    })
   }
   getInventory = () => {
     let equip = null;
@@ -39,7 +44,8 @@ export default class Inventory extends Component {
     });
   };
   deleteItem = id => {
-    axios.delete(`/api/equipments/${id}`).then(res => {
+    axios.delete(`/api/equipments/${id}`)
+    .then(res => {
       this.getInventory();
     });
   };
@@ -47,21 +53,24 @@ export default class Inventory extends Component {
     const showInventory =
       this.state.equipment != null &&
       this.state.equipment.map(item => {
-        let today = new Date();
         return (
           <tr key={item._id}>
             <td>
-              <img src={item.pictureURL} width={70} />
+              <Image src={item.pictureURL} style={ { width: "120px"} }  fluid />
             </td>
             <td>{item.name}</td>
             <td>
               <SingleEquipment id={item._id} />
               <Link to="/">
-                <Button variant="primary" style={{ margin: "0px 20px" }}>
+                <Button variant="primary" style={ { margin: "0 10px 0 10px"}}>
                   Rent
                 </Button>
               </Link>
-              <Button variant="danger" onClick={() => this.deleteItem(item._id)}>
+              <Button variant="danger" onClick={() => {
+                if(window.confirm("Are you sure you want to delete this item?")){
+                  this.deleteItem(item._id)
+                }
+              }}>
                 Delete
               </Button>
             </td>
@@ -70,19 +79,20 @@ export default class Inventory extends Component {
       });
 
     return (
-      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
+      <div>
+      <Col>
         <h1>Full Inventory</h1>
-        <Table bordered striped hover style={{ width: "97%" }}>
+        <Table responsive bordered striped hover>
           <thead>
             <tr>
               <th>Photo</th>
               <th>Name</th>
               <th>Actions</th>
-              <th />
             </tr>
           </thead>
           <tbody>{showInventory}</tbody>
         </Table>
+        </Col>
       </div>
     );
   }
