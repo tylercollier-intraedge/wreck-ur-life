@@ -1,5 +1,5 @@
 // const { expect } = require('chai')
-const usersModel = require('../../models/user')
+const usersModel = require('../../../models/user')
 // const mongoose = require('mongoose');
 
 describe('user Model', () => {
