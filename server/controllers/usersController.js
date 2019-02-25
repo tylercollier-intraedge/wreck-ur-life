@@ -16,6 +16,12 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   create: function (req, res) {
+    let email = String(req.body.email);
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    let emailIsValid = re.test(String(email).toLowerCase());
+    if(!req.body.firstName || !req.body.lastName || !req.body.email || !req.body.phone){
+      res.status(500).send("Invalid input")
+    } else {
     let dbReady = {
       name: `${req.body.firstName} ${req.body.lastName}`,
       email: req.body.email,
@@ -27,6 +33,7 @@ module.exports = {
       .create(dbReady)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
+  }
   },
   update: function (req, res) {
     db.User
