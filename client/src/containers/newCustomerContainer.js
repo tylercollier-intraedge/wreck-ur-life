@@ -5,14 +5,20 @@ import Board from '../components/Board/Board';
 
 class BoardContainer extends Component {
 
-    handleSubmit = (newState) => {
-        this.props.handleSubmit(newState);
+    handleChange = (event) => {
+        this.props.handleChange(event);
+    }
+
+    handleSubmit = (event) => {
+ 
+        this.props.handleSubmit(state);
     }
 
     render() {
         return (
           <Board
             { ...this.props }
+            handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
           />
         );

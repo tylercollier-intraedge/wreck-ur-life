@@ -1,12 +1,18 @@
 import API from '../utils/API';
 
-// action types for Board
+// action types for NewCustomer
+export const HANDLECHANGE = 'HANDLECHANGE';
 export const HANDLESUBMIT = 'HANDLESUBMIT';
-export const PHONECHECK = 'PHONECHECK';
 
-// action creators for Board
-export function handleSubmit(newState) {
-    const request = API.createNewCustomer(newState)
+// action creators for NewCustomer
+export function handleChange(data) {
+    return {
+        type: HANDLECHANGE,
+        payload: data
+    }
+
+export function handleSubmit(state) {
+    const request = API.createNewCustomer(state)
         .then(res => {
             return res;            
         })
