@@ -41,8 +41,7 @@ module.exports = {
       .then(status => console.log("Email Sent" ,  status))
       .catch(err => res.status(422).json(err));
     } else {
-      console.log("dupe entry");
-      res.status(500).send("Duplicat entry");
+      res.status(500).send("There already is a rental for this item on the given day.");
     }
     
   },
