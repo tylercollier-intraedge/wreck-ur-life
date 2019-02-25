@@ -20,7 +20,10 @@ class newCustomer extends Component {
     API.createNewCustomer(this.state)
       .then(alert('New User Added'))
       .then(this.setState({firstName: "", lastName: "", phone: "", email: ""}))
-      .catch(err => console.log(err));
+      .catch(err => { 
+        console.log(err)
+        this.setState({firstName: "", lastName: "", phone: "", email: ""})
+      });
   }
 
   //Regex validation for phone number
@@ -40,28 +43,28 @@ class newCustomer extends Component {
           <Form.Control 
             type="Name" 
             placeholder="John" 
-            value={this.state.firstName.value}
+            value={this.state.firstName}
             onChange={event => this.setState({ firstName: event.target.value })}
           />
           <Form.Label>Last Name:</Form.Label>
           <Form.Control 
             type="Name" 
             placeholder="Smith" 
-            value={this.state.lastName.value}
+            value={this.state.lastName}
             onChange={event => this.setState({ lastName: event.target.value })}
             />
           <Form.Label>Email Address:</Form.Label>
           <Form.Control 
             type="email" 
             placeholder="name@example.com" 
-            value={this.state.email.value}
+            value={this.state.email}
             onChange={event => this.setState({ email: event.target.value })}
           />
           <Form.Label>Email Address:</Form.Label>
           <Form.Control 
             type="Number" 
             placeholder="xxx xxx xxxx" 
-            value={this.state.phone.value}
+            value={this.state.phone}
             onChange={event => this.setState({ phone: event.target.value })}
           />
           <Button 
