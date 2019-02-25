@@ -56,7 +56,6 @@ class TextCustomer extends Component {
     } else {
       customerID = selectedCustomer._id;
     }
-
     API.sendText(customerID, customerInput);
   };
 
