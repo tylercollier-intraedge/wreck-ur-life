@@ -14,8 +14,6 @@ let transporter = nodemailer.createTransport({
     }
 });
 
-
-
 module.exports = {
 
     sendEmail: function (email, subject, text){
@@ -37,7 +35,5 @@ module.exports = {
          })
     }
 }
-
-
 
 module.exports.sendText("3304516205", "promise test")
