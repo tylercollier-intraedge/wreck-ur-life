@@ -16,7 +16,12 @@ class TextCustomer extends Component {
 
   getAllUsers = () => {
     API.getAllUsers().then(response => {
-      this.setState({ customers: response.data });
+      this.setState({ customers: response.data }, () => {
+        let firstCustomerInList = this.state.customers[0];
+        this.setState({
+          selectedCustomer: firstCustomerInList
+        });
+      });
     });
   };
 
@@ -36,7 +41,6 @@ class TextCustomer extends Component {
 
   handleCustomerSelect = event => {
     event.preventDefault();
-    const { selectedCustomer } = this.state;
     this.setState({
       displayTextForm: !this.state.displayTextForm
     });
@@ -45,10 +49,14 @@ class TextCustomer extends Component {
   handleSubmit = e => {
     e.preventDefault();
     let { customerInput, selectedCustomer } = this.state;
-    console.log('customerInput', customerInput);
-    console.log('selectedCustomer', selectedCustomer);
+    let customerID;
 
-    let customerID = JSON.parse(selectedCustomer)._id;
+    if (typeof selectedCustomer === 'string') {
+      customerID = JSON.parse(selectedCustomer)._id;
+    } else {
+      customerID = selectedCustomer._id;
+    }
+
     API.sendText(customerID, customerInput);
   };
 
@@ -82,7 +90,6 @@ class TextCustomer extends Component {
                 value={this.state.selectedCustomer}
                 onChange={this.handleCustomerChange}
               >
-                <option value="" />
                 {this.state.customers.map(customer => (
                   <option key={customer._id} value={JSON.stringify(customer)}>
                     {customer.name}
