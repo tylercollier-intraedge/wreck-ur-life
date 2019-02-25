@@ -1,5 +1,5 @@
 const db = require('../models');
-
+let comUtils = require('../utils/comUtils')
 // Defining methods for the NotesController
 module.exports = {
   findAll: function (req, res) {
@@ -33,7 +33,21 @@ module.exports = {
       .create(dbReady)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
-  }
+    }
+  },
+  sendText: async function(req, res){
+    let userID = req.body.id;
+    let messageText = req.body.text;
+    if(!userID || !messageText ) {
+      res.status("500").send("Invalid input")
+    } else {
+    let userObj = await db.User.findById(userID)
+    comUtils.sendText(userObj.phoneNumber, messageText)
+    .then(() => res.send("Text sent"))
+    .catch(err => res.status(500).json(err))
+    console.log(userObj)
+    // comUtils.sendText()
+    }
   },
   update: function (req, res) {
     db.User
