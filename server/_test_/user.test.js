@@ -4,7 +4,8 @@ import { create } from 'domain';
 require('regenerator-runtime/runtime')
 // Run using "jest user.test.js"
 
-describe('usersController', ()=> {
+describe('users', ()=> {
+    
     it('Listing users returns results', async () => {
         let users = await Axios.get('http://localhost:3001/api/users')
         .then(results => results.data)
@@ -13,21 +14,18 @@ describe('usersController', ()=> {
     it('Returns an error when given a non object ID to search for',() => {
         return expect(Axios.get('http://localhost:3001/api/users/1')).rejects.toThrow()
     })
-
-    it('doesnt allow duplicate entries', async () => {
-        let fakerental = {
-            user_id: "1",
-            user_name: "Jordan",
-            equipment_id: "1",
-            equipment_name: "Something",
-            rental_date: new Date(),
-        }
-        //The user ID/Equip ID will be invalid, but that should be a non issue.
-        let firstCall = await Axios.post('http://localhost:3001/api/rentals', fakerental)
-        return expect(Axios.post('http://localhost:3001/api/rentals', fakerental)).rejects.toThrow()
+    it('You can delete a user who exists', async () => {
+        let newUser = await Axios.post('http://localhost:3001/api/users', {
+            firstName: "John",
+            lastName: "Do",
+            email: "jdo@whitehouse.gov",
+            phone: "2024045955"
+        })
+        let deletedUser = await Axios.delete('http://localhost:3001/api/users/' + newUser.data._id)
+        return expect(Axios.get('http://localhost:3001/api/users/' + newUser.data._id))
+        .rejects.toThrowError("Request failed with status code 422")
 
     })
-
     it('creates an entry that matches the input', async () => {
         // See https://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript
         let fakeName = Math.random().toString(36).substring(7);
@@ -42,7 +40,6 @@ describe('usersController', ()=> {
         }
         let createdUser = await Axios.post('http://localhost:3001/api/users', fakeUser)
         let foundUser = await Axios.get('http://localhost:3001/api/users/' + createdUser.data._id)
-        console.log(foundUser.data);
         // Make sure that the result has a matching name, email and phone number.
         expect(foundUser.data).toMatchObject({ 
             email: fakeUser.email,
