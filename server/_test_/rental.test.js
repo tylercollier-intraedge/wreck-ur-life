@@ -2,7 +2,7 @@ import Axios from 'axios';
 import { create } from 'domain';
 // Below line added based on https://github.com/facebook/jest/issues/5698
 require('regenerator-runtime/runtime')
-// Run using "jest user.test.js"
+// Run using "jest rental.test.js"
 
 describe('rentals', () => {
 

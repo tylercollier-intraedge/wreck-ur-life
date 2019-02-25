@@ -12,7 +12,12 @@ module.exports = {
   findById: function (req, res) {
     db.User
       .findById(req.params.id)
-      .then(dbModel => res.json(dbModel))
+      .then(dbModel => { 
+        if(!dbModel) {
+          throw new Error("No Result found")
+        }
+        res.json(dbModel) 
+      })
       .catch(err => res.status(422).json(err));
   },
   create: function (req, res) {

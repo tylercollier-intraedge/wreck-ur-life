@@ -5,9 +5,9 @@ import Navigation from './components/Navigation';
 import NewItem from './components/NewItem';
 import RentingForm from './components/RentingForm';
 import RentalHistory from './components/RentalHistory';
-import NewCustomer from './components/newCustomer';
+import NewCustomer from './components/NewCustomer';
 import Inventory from './components/Inventory';
-import TextCustomer from './components/textCustomer';
+import TextCustomer from './components/TextCustomer';
 import './App.css';
 
 function App() {
