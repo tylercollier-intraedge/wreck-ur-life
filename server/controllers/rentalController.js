@@ -15,8 +15,20 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  create: function(req, res) {
-    db.Rental.create(req.body)
+  create: async function(req, res) {
+    let searchItem = req.body.equipment_id;
+    let searchDate = new Date(req.body.rental_date)
+    let nextDay = new Date();
+    nextDay.setDate(searchDate.getDate() + 1);
+    console.log(searchItem, " ", searchDate, " ", nextDay)
+    let rentals = await db.Rental.find({
+      "equipment_id":searchItem,
+      "rental_date": { $gte: searchDate , $lt: nextDay }
+    })
+
+    console.log(rentals.length)
+    if(rentals.length === 0){
+      db.Rental.create(req.body)
       .then(dbModel => { 
         res.json(dbModel) 
         return Promise.all([db.User.findById(dbModel.user_id), Promise.resolve(dbModel)])
@@ -28,6 +40,10 @@ module.exports = {
       })
       .then(status => console.log("Email Sent" ,  status))
       .catch(err => res.status(422).json(err));
+    } else {
+      res.status(500).send("There already is a rental for this item on the given day.");
+    }
+    
   },
   update: function (req, res) {
     db.Rental
@@ -74,7 +90,7 @@ module.exports = {
     let parsedDate = new Date(req.body.date);
     let parsedDateNextDay = new Date();
     parsedDateNextDay.setDate(parsedDate.getDate() + 1 );
-    await db.Rental.find({ rental_date: { $gt: parsedDate , $lt: parsedDateNextDay } })
+    await db.Rental.find({ rental_date: { $gte: parsedDate , $lt: parsedDateNextDay } })
     .then(results => {
       currentRentals = results;
     })

@@ -47,6 +47,9 @@ class TextCustomer extends Component {
     let { customerInput, selectedCustomer } = this.state;
     console.log('customerInput', customerInput);
     console.log('selectedCustomer', selectedCustomer);
+
+    let customerID = JSON.parse(selectedCustomer)._id;
+    API.sendText(customerID, customerInput);
   };
 
   displayTextForm = () => (
