@@ -53,18 +53,6 @@ function Navigation() {
       </Nav.Item>
       <Nav.Item>
         <Link
-          to="/customerList"
-          className={
-            window.location.pathname === '/customerList'
-              ? 'nav-link active'
-              : 'nav-link'
-          }
-        >
-          Customer List
-        </Link>
-      </Nav.Item>
-      <Nav.Item>
-        <Link
           to="/rentalHistory"
           className={
             window.location.pathname === '/rentalHistory'
