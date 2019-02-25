@@ -1,5 +1,5 @@
 import { isFunction } from 'lodash';
-import controllers from '../../controllers/usersController';
+import controllers from '../../../controllers/usersController';
 
 describe('item controllers', () => {
   test('has crud controllers', () => {

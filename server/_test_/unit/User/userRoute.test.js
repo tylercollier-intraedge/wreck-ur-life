@@ -1,4 +1,4 @@
-import router from '../../routes/api/users';
+import router from '../../../routes/api/users';
 
 describe('item router', () => {
   test('has crud routes', () => {
