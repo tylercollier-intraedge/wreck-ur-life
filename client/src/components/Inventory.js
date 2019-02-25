@@ -2,7 +2,7 @@ import API from '../utils/API'
 import React, { Component } from "react";
 import axios from "axios";
 import { Table, Button, Image, Col } from "react-bootstrap";
-import SingleEquipment from "./singleEquipment";
+import SingleEquipment from "./SingleEquipment";
 import { Link } from "react-router-dom";
 
 

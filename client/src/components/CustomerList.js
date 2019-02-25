@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import {CustomerContainer} from './CustomerIndividual'
 import {Container, Jumbotron} from 'react-bootstrap'
 import API from '../utils/API';
-import SingleCustomer from './singleCustomer';
+import SingleCustomer from './SingleCustomer';
 
 class CustomerList extends Component{
     state = {
