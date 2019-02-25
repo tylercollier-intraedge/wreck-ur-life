@@ -1,15 +1,17 @@
-const usersController = require('../../../controllers/usersController')
-// const usersModel = require('../../../models/user')
-const mongoose = require('mongoose');
+import Axios from 'axios';
+require('regenerator-runtime/runtime')
 
-// describe('users', () => {
-//   it('check if in collection users property', () => {
-//     return usersController.findAll()
-//     // console.log('SHOW: ', );
-    
-//     .then(() => mongoose.model('User').find())
-//     .then(result => {
-//       expect(result).to.have.lengthOf.at.least(1);
-//     })
-//   })
-// })
+describe('rentals', () => {
+    it('checking promerty and value of user collection', async () => {
+        let firstCall = await Axios.get('http://localhost:3001/api/users')        
+        return expect(firstCall.data[0]).toHaveProperty("name", "Jordan");
+    })
+    it('checking promerty and value of user collection', async () => {
+        let firstCall = await Axios.get('http://localhost:3001/api/users')        
+        return expect(firstCall.data[0]).toHaveProperty("email", "test@com.com");
+    })
+    it('checking promerty and value of user collection', async () => {
+        let firstCall = await Axios.get('http://localhost:3001/api/users')        
+        return expect(firstCall.data[0]).toHaveProperty("phoneNumber", 18005554040);
+    })
+})

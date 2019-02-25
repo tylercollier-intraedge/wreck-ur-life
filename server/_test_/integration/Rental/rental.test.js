@@ -1,6 +1,4 @@
 import Axios from 'axios';
-import { create } from 'domain';
-// Below line added based on https://github.com/facebook/jest/issues/5698
 require('regenerator-runtime/runtime')
 // Run using "jest rental.test.js"
 
@@ -19,6 +17,4 @@ describe('rentals', () => {
         return expect(Axios.post('http://localhost:3001/api/rentals', fakerental)).rejects.toThrow()
 
     })
-
-
 })
