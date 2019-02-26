@@ -57,7 +57,7 @@ class NewCustomer extends Component {
             value={this.state.email}
             onChange={this.handleChange}
           />
-          <Form.Label>Email Address:</Form.Label>
+          <Form.Label>Phone Number:</Form.Label>
           <Form.Control 
             type="Number" 
             placeholder="xxx xxx xxxx" 
