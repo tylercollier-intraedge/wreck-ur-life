@@ -1,19 +1,67 @@
 # Wreck Your Life
-### The Best Rental System on the market PERIOD!
+Welcome to Wreck Your Life, the software that makes renting easy.
+It is a full stack application with React, Node JS, Express JS and MongoDb. 
+This software will allow you to add customers to your database, add items for rental, rent equipment by availability and track renting history by customer or eqipment name.
 
-### Usage
-Welcome to Wreck Your Life, the software that makes renting easy.  This software will allow you to add customers to your database, add items for rental, and track current stock as it is rented.
+## Prerequisites
 
-### Process Flow
-If you are starting with a new customer you will first want to navigate to the New Customer page and fill out the form.  After completing this step, navigate to the rental page.  You will see that the newly added customer can now be selected from the list of available Renters.  You can now pick the items which the customer would like to rent.
-Process Flow:
-1. Select a Customer
-    -   If customer is not available in list navigate to the customer creation page
+- [Node.js 8.0+](http://nodejs.org)
+```bash
+    brew install node
+```
 
-2. Select Items they wish to rent
+- [MongoDB](https://www.mongodb.com/)
 
-3. Review an Submit
+## Getting Started
 
-### Contributor Information
+The easiest way to get started is to clone the repository:
 
-If you would like to contribute to this project you will only need a computer and a Github.  No additional .env or .config files are necessary.  Use `npm run dev` to start the application.
+```bash
+# Clone the repository
+git clone https://github.com/adamdrag/wreck-ur-life.git myProject
+
+# Change directory
+cd myProject
+
+# Install NPM dependencies
+npm install
+
+# Run default seeds for database
+npm run seed
+
+# Start the app in terminal
+npm start
+
+# For development
+npm run dev
+```
+
+## Some of the included libraries
+* [react](https://www.npmjs.com/package/react) - JavaScript library for creating user interfaces (define React components)
+* [express.js](https://github.com/expressjs/express) - The server for handling and routing HTTP requests
+* [mongoose](https://www.npmjs.com/package/mongoose) - Mongoose is a MongoDB object modeling tool designed to work in an asynchronous environment
+* [axios](https://www.npmjs.com/package/axios) - Promise based HTTP client for the browser and node.js
+* [twilio](https://www.npmjs.com/package/twilio) - For communication via emial and message
+* [webpack](https://www.npmjs.com/package/webpack) - Bundle JavaScript files for usage in a browser
+* [jest](https://www.npmjs.com/package/jest) - For unit and integrate testing
+
+## Technologies and libraries
+* React.js
+* Node.js
+* Express.js
+* MongoDB
+* Twilio
+* Webpack
+
+## Authors
+
+* **Adam Drag**  - [Adam Drag](https://github.com/adamdrag/)
+* **Jordan Lee**  - [Jordan Lee](https://github.com/jorlee92/)
+* **Kyle Thomas**  - [Kyle Thomas](https://github.com/kthomas852/)
+* **Madi Walmsley**  - [Madi Walmsley](https://github.com/rilakumma/)
+* **Esteban Trevino**  - [Esteban Trevino](https://github.com/EsTrevino/)
+* **Trent Cooper**  - [Trent Cooper](https://github.com/coop741/)
+
+## Troubleshooting
+
+Please create an [issue](https://github.com/adamdrag/wreck-ur-life/issues).

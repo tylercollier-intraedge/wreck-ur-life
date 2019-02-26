@@ -1,4 +1,5 @@
 import router from '../../../routes/api/users';
+require('regenerator-runtime/runtime');
 
 describe('item router', () => {
   test('has crud routes', () => {
@@ -10,7 +11,7 @@ describe('item router', () => {
       { path: '/:id', method: 'put' }
     ];
 
-    routes.forEach((route) => {
+    routes.forEach(route => {
       const match = router.stack.find(
         s => s.route.path === route.path && s.route.methods[route.method]
       );

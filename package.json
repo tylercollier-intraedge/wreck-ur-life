@@ -37,11 +37,12 @@
     "react-dropzone": "^8.2.0",
     "react-fontawesome": "^1.6.1",
     "react-promise": "^2.1.0",
-    "react-redux": "^6.0.0",
+    "react-redux": "^6.0.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "^2.1.2",
     "redux": "^4.0.1",
     "redux-promise": "^0.6.0",
+    "redux-thunk": "^2.3.0",
     "superagent": "^4.1.0",
     "twilio": "^3.28.1"
   },
