@@ -1,7 +1,9 @@
 import API from '../utils/API';
 import React, { Component } from 'react';
-import { Table, Button, Image, Col } from 'react-bootstrap';
+import { Table, Button, Image, Col, Modal } from 'react-bootstrap';
 import SingleEquipment from './singleEquipment';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
@@ -11,12 +13,20 @@ class Inventory extends Component {
     this.props.getInventory();
   }
   state = {
-    show: null
+    show: null,
+    currentItemId: null
   };
 
   deleteItem = id => {
     API.deleteItem(id).then(() => {
-      this.props.getInventoryWithRentalDates();
+      this.setState(
+        {
+          show: false
+        },
+        () => {
+          this.props.getInventoryWithRentalDates();
+        }
+      );
     });
   };
 
@@ -42,11 +52,10 @@ class Inventory extends Component {
               <Button
                 variant="danger"
                 onClick={() => {
-                  if (
-                    window.confirm('Are you sure you want to delete this item?')
-                  ) {
-                    this.deleteItem(item._id);
-                  }
+                  this.setState({
+                    show: true,
+                    currentItemId: item._id
+                  });
                 }}
               >
                 Delete
@@ -71,6 +80,32 @@ class Inventory extends Component {
             <tbody>{showInventory}</tbody>
           </Table>
         </Col>
+
+        <Modal show={this.state.show} onHide={this.handleClose}>
+          <Modal.Header />
+          <Modal.Body>
+            Are you sure you want to delete this item?{' '}
+            <span className="font-weight-bold text-warning">
+              <FontAwesomeIcon icon={faExclamationTriangle} />
+            </span>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              variant="secondary"
+              onClick={() => {
+                this.setState({ show: false, currentItemId: null });
+              }}
+            >
+              I dont want to delete
+            </Button>
+            <Button
+              variant="danger"
+              onClick={() => this.deleteItem(this.state.currentItemId)}
+            >
+              Delete Item
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </div>
     );
   }
