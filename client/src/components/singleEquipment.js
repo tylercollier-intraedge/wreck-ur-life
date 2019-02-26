@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { Modal, Image, Button } from "react-bootstrap";
-import API from "../utils/API";
+import React, { Component } from 'react';
+import { Modal, Image, Button } from 'react-bootstrap';
+import API from '../utils/API';
 
 class SingleEquipment extends Component {
   constructor(props) {
@@ -24,7 +24,6 @@ class SingleEquipment extends Component {
 
   componentDidMount() {
     API.getSingleEquipment(this.props.id).then(response => {
-      console.log(response);
       this.setState({
         name: response.data.name,
         pictureURL: response.data.pictureURL
@@ -32,7 +31,6 @@ class SingleEquipment extends Component {
     });
   }
   render() {
-    console.log(this.state.name);
     return (
       <>
         <Button variant="info" onClick={this.handleShow}>
