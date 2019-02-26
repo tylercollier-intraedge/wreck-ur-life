@@ -1,6 +1,10 @@
 const db = require('../models');
 let comUtils = require('../utils/comUtils')
 // Defining methods for the NotesController
+
+// Below line added based on https://github.com/facebook/jest/issues/5698
+require('regenerator-runtime/runtime')
+
 module.exports = {
   findAll: function (req, res) {
     db.User
