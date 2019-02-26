@@ -1,7 +1,7 @@
 # Wreck Your Life
 Welcome to Wreck Your Life, the software that makes renting easy.
 It is a full stack application with React, Node JS, Express JS and MongoDb. 
-This software will allow you to add customers to your database, add items for rental, rent equipment by availability and track renting history by customer or eqipment name.
+This software will allow you to add customers to your database, add items for rental, rent equipment by availability and track renting history by customer or eqipment name. Customer renting an equipment receives confirmation email. Admin have ability to text a customer if an equipment is overdue.
 
 ## Prerequisites
 
