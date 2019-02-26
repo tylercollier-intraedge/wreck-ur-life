@@ -1,6 +1,10 @@
 const db = require('../models');
 let comUtils = require('../utils/comUtils')
 // Defining methods for the NotesController
+
+// Below line added based on https://github.com/facebook/jest/issues/5698
+require('regenerator-runtime/runtime')
+
 module.exports = {
   findAll: function (req, res) {
     db.User
@@ -12,7 +16,12 @@ module.exports = {
   findById: function (req, res) {
     db.User
       .findById(req.params.id)
-      .then(dbModel => res.json(dbModel))
+      .then(dbModel => { 
+        if(!dbModel) {
+          throw new Error("No Result found")
+        }
+        res.json(dbModel) 
+      })
       .catch(err => res.status(422).json(err));
   },
   create: function (req, res) {

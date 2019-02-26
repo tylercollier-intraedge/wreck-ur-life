@@ -2,19 +2,14 @@ import React, { Component } from "react";
 import {Form, Button, Card } from 'react-bootstrap'
 import API from "../utils/API";
 
-class newCustomer extends Component {
-  //local state needed for the form submission
-  constructor(props) {
-    super(props);
-    this.state = {
+class newCustomer extends Component {  
+    state = {
       firstName: "",
       lastName: "",
-      phone: "",
-      email: ""
-    };
-  }
+      email: "",
+      phone: ""
+    }
 
-  //Submission function takes new customer info and sends to create-new-customer route
   handleSubmit = (event) => {
     event.preventDefault();
     API.createNewCustomer(this.state)
@@ -26,13 +21,12 @@ class newCustomer extends Component {
       });
   }
 
-  //Regex validation for phone number
-  phoneCheck = (num) =>  {
-    const check = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/
-    let result;
-    num.value.match(check) ?  result=true :  result=false
-    return result
-  }
+  handleChange = (event) => {
+    const { name, value } = event.target;
+      this.setState({
+        [name]: value
+    });
+  };
 
   render() {
     return (
@@ -42,34 +36,38 @@ class newCustomer extends Component {
           <Form.Label>First Name:</Form.Label>
           <Form.Control 
             type="Name" 
-            placeholder="John" 
+            placeholder="John"
+            name="firstName" 
             value={this.state.firstName}
-            onChange={event => this.setState({ firstName: event.target.value })}
+            onChange={this.handleChange}
           />
           <Form.Label>Last Name:</Form.Label>
           <Form.Control 
             type="Name" 
-            placeholder="Smith" 
+            placeholder="Smith"
+            name="lastName" 
             value={this.state.lastName}
-            onChange={event => this.setState({ lastName: event.target.value })}
+            onChange={this.handleChange}
             />
           <Form.Label>Email Address:</Form.Label>
           <Form.Control 
             type="email" 
-            placeholder="name@example.com" 
+            placeholder="name@example.com"
+            name="email"
             value={this.state.email}
-            onChange={event => this.setState({ email: event.target.value })}
+            onChange={this.handleChange}
           />
           <Form.Label>Email Address:</Form.Label>
           <Form.Control 
             type="Number" 
             placeholder="xxx xxx xxxx" 
+            name="phone"
             value={this.state.phone}
-            onChange={event => this.setState({ phone: event.target.value })}
+            onChange={this.handleChange}
           />
           <Button 
             type="submit" 
-            onClick={this.handleSubmit.bind(this)}
+            onClick={this.handleSubmit}
           >
             Submit
           </Button>
