@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import {Form, Button, Card } from 'react-bootstrap'
 import API from "../utils/API";
 
-class newCustomer extends Component {  
+class NewCustomer extends Component {  
     state = {
       firstName: "",
       lastName: "",
@@ -77,4 +77,4 @@ class newCustomer extends Component {
   }
 }
 
-export default newCustomer;
+export default NewCustomer;
