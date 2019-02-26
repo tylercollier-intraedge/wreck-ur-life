@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import API from '../utils/API';
-import { Jumbotron, Form, Button } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 
 class TextCustomer extends Component {
   state = {
@@ -62,44 +62,43 @@ class TextCustomer extends Component {
 
   displayTextForm = () => (
     <div className="mt-5 p-3">
-      <Jumbotron>
-        <Form>
-          <Form.Group>
-            <Form.Label>Text:</Form.Label>
-            <Form.Control
-              as="input"
-              value={this.state.customerInput}
-              onChange={this.handleFormInputChange}
-            />
-          </Form.Group>
-          <Button onClick={this.handleSubmit}>Send</Button>
-        </Form>
-      </Jumbotron>
+      <Form className="form">
+        <Form.Group>
+          <Form.Label className="p-3 font-weight-bold">Text:</Form.Label>
+          <Form.Control
+            as="input"
+            value={this.state.customerInput}
+            onChange={this.handleFormInputChange}
+          />
+        </Form.Group>
+        <Button onClick={this.handleSubmit}>Send</Button>
+      </Form>
     </div>
   );
 
   render() {
     return (
       <div className="container mt-5 p-3">
-        <Jumbotron>
-          <Form>
-            <Form.Group>
-              <Form.Label>Select Customer:</Form.Label>
-              <Form.Control
-                as="select"
-                value={this.state.selectedCustomer}
-                onChange={this.handleCustomerChange}
-              >
-                {this.state.customers.map(customer => (
-                  <option key={customer._id} value={JSON.stringify(customer)}>
-                    {customer.name}
-                  </option>
-                ))}
-              </Form.Control>
-            </Form.Group>
-            <Button onClick={this.handleCustomerSelect}>Select</Button>
-          </Form>
-        </Jumbotron>
+        <Form className="form">
+          <Form.Group>
+            <Form.Label className="p-3 font-weight-bold">
+              Select Customer to Message:
+            </Form.Label>
+            <Form.Control
+              className="p-3"
+              as="select"
+              value={this.state.selectedCustomer}
+              onChange={this.handleCustomerChange}
+            >
+              {this.state.customers.map(customer => (
+                <option key={customer._id} value={JSON.stringify(customer)}>
+                  {customer.name}
+                </option>
+              ))}
+            </Form.Control>
+          </Form.Group>
+          <Button onClick={this.handleCustomerSelect}>Select</Button>
+        </Form>
 
         {this.state.displayTextForm ? this.displayTextForm() : ''}
       </div>
