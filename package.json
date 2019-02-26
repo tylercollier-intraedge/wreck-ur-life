@@ -5,9 +5,9 @@
   "main": "server.js",
   "scripts": {
     "build": "webpack --mode production",
-    "start": "npm run build && node index.js",
+    "start": "npm run build && node server.js",
     "client": "webpack-dev-server --mode development --devtool inline-source-map --hot",
-    "server": "nodemon index.js",
+    "server": "nodemon server.js",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "seed": "node server/scripts/seedDB.js",
     "testJest": "jest --watchAll",
