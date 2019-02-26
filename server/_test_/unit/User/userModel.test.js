@@ -24,16 +24,4 @@ describe('user Model', () => {
             required: true
         })
     })
-    it('check date collection schema types', () => {
-        const user = usersModel.schema.obj.rentalHistory;
-        expect(user).toEqual({
-            type: Array
-        })
-    })
-    it('check date collection schema types', () => {
-        const user = usersModel.schema.obj.currentRentals;
-        expect(user).toEqual({
-            type: Array
-        })
-    })
 })

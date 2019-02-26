@@ -21,7 +21,6 @@ function App() {
           <Route exact path="/newItem" component={NewItem} />
           <Route exact path="/newCustomer" component={NewCustomer} />
           <Route exact path="/inventory" component={Inventory} />
-          <Route exact path="/inventory" component={Inventory} />
           <Route exact path="/textCustomer" component={TextCustomer} />
           <Route exact path="/rentalHistory" component={RentalHistory} />
         </Switch>
