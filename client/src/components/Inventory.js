@@ -10,6 +10,9 @@ class Inventory extends Component {
   componentDidMount() {
     this.props.getInventory();
   }
+  state = {
+    show: null
+  };
 
   deleteItem = id => {
     API.deleteItem(id).then(() => {

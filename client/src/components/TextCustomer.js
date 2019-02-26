@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import API from '../utils/API';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Modal } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 class TextCustomer extends Component {
   state = {
     customers: [],
     selectedCustomer: {},
     displayTextForm: false,
-    customerInput: ''
+    customerInput: '',
+    show: false,
+    messageSentSuccessfully: null
   };
 
   componentDidMount() {
@@ -46,6 +50,12 @@ class TextCustomer extends Component {
     });
   };
 
+  handleClose = event => {
+    this.setState({
+      show: false
+    });
+  };
+
   handleSubmit = e => {
     e.preventDefault();
     let { customerInput, selectedCustomer } = this.state;
@@ -56,7 +66,20 @@ class TextCustomer extends Component {
     } else {
       customerID = selectedCustomer._id;
     }
-    API.sendText(customerID, customerInput);
+
+    API.sendText(customerID, customerInput)
+      .then(res => {
+        this.setState({
+          show: true,
+          messageSentSuccessfully: true
+        });
+      })
+      .catch(err => {
+        this.setState({
+          show: true,
+          messageSentSuccessfully: false
+        });
+      });
   };
 
   displayTextForm = () => (
@@ -76,6 +99,7 @@ class TextCustomer extends Component {
   );
 
   render() {
+    let { messageSentSuccessfully } = this.state;
     return (
       <div className="container mt-5 p-3">
         <Form className="form">
@@ -98,6 +122,34 @@ class TextCustomer extends Component {
           </Form.Group>
           <Button onClick={this.handleCustomerSelect}>Select</Button>
         </Form>
+
+        <Modal show={this.state.show} onHide={this.handleClose}>
+          <Modal.Header>
+            <span className="font-weight-bold">
+              {messageSentSuccessfully ? 'Success' : 'Something went wrong...'}
+            </span>{' '}
+            <FontAwesomeIcon
+              className={
+                messageSentSuccessfully ? 'text-success' : 'text-danger'
+              }
+              icon={messageSentSuccessfully ? faCheck : faTimes}
+            />
+          </Modal.Header>
+          <Modal.Body>
+            <div className="row pl-3">
+              <span>
+                {messageSentSuccessfully
+                  ? 'Message was sent'
+                  : 'Message was not sent'}
+              </span>
+            </div>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={this.handleClose}>
+              Ok
+            </Button>
+          </Modal.Footer>
+        </Modal>
 
         {this.state.displayTextForm ? this.displayTextForm() : ''}
       </div>
