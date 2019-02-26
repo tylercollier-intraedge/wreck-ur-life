@@ -10,7 +10,8 @@
     "server": "nodemon index.js",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "seed": "node server/scripts/seedDB.js",
-    "test": "jest --watchAll"
+    "testJest": "jest --watchAll",
+    "heroku-postbuild": "npm run build"
   },
   "author": "Adam Drag, Kyle Thomas, Madi Walmsley, Jordan Lee",
   "license": "ISC",
