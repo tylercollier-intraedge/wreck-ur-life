@@ -10,7 +10,7 @@
     "server": "nodemon index.js",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "seed": "node server/scripts/seedDB.js",
-    "testJest": "jest --watchAll"
+    "test": "jest --watchAll"
   },
   "author": "Adam Drag, Kyle Thomas, Madi Walmsley, Jordan Lee",
   "license": "ISC",
