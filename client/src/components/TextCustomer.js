@@ -52,7 +52,11 @@ class TextCustomer extends Component {
 
   handleClose = event => {
     this.setState({
-      show: false
+      selectedCustomer: {},
+      displayTextForm: false,
+      customerInput: '',
+      show: false,
+      messageSentSuccessfully: null
     });
   };
 
