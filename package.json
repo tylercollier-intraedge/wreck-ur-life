@@ -13,7 +13,7 @@
     "testJest": "jest --watchAll",
     "heroku-postbuild": "npm run build"
   },
-  "author": "Adam Drag, Kyle Thomas, Madi Walmsley, Jordan Lee, Esteban Trevino, Trent Cooper",
+  "author": "Adam Drag, Kyle Thomas, Madi Walmsley, Jordan Lee, Esteban Trevino, Trent Cooper, T$",
   "license": "ISC",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.15",
