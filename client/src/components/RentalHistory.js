@@ -140,7 +140,7 @@ class RentalHistory extends Component {
                         key={rental._id}
                     >
                         Equipment's Name: <span>{rental.equipment_name}</span>
-                        Rented Date: <span>{moment(this.state.rental_date).format('MMMM Do YYYY')}</span>
+                        Rented Date: <span>{moment(rental.rental_date).format('MMMM Do YYYY')}</span>
                     </Card.Text>
                 ))}
             </Card.Body>
